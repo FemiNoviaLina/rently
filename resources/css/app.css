@@ -1,3 +1,86 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.navbar-logo {
+    font-family: 'Saira Stencil One', cursive;
+    font-size: 2rem;
+    margin: 10px;
+}
+
+.rounded-cust {
+    border-radius: 12px;
+}
+
+.navbar-option:not(.rent-menu):hover {
+    color: #7C7DDC;
+    font-weight: bold;
+}
+
+.rent-menu {
+    color: #000000;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-logo{
+        margin: 10px 20px;
+        text-align: left;
+        display: inline-block;
+        width: 100%;
+    }
+
+    #menu-toggle {
+        display: block;
+    }
+
+    #menu-list, .navbar-links {
+        display: block;
+    }
+
+    #menu-list {
+        transition: 0.5s;
+        position: absolute;
+        top: 50px;
+        width: 100%;
+        max-height: 0px;
+        overflow: hidden;
+    }
+
+    #rent-button {
+        width: 100%;
+        margin: auto;
+    }
+
+    .rent-menu {
+        position: static;
+        background-color: white;
+        width: 100%;
+    }
+
+    .navbar-option {
+        margin: 0;
+    }
+
+    .navbar-links {
+        padding: 0;
+    }
+
+    .navbar-links a {
+        width: 100%;
+        padding: 2px;
+    }
+
+    .menu-option {
+        width: 100%;
+        padding: 0px auto;
+    }
+
+    .cta-button {
+        justify-content: center;
+    }
+}
+
