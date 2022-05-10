@@ -16,6 +16,11 @@ class BasicViewController extends Controller
         return view('welcome', ['reviews' => $reviews]);
     }
 
+    public function fallback()
+    {
+        abort(404);
+    }
+
     public function guide()
     {
         return view('guide');
@@ -24,5 +29,20 @@ class BasicViewController extends Controller
     public function cars()
     {
         return view('cars');
+    }
+
+    public function motors()
+    {
+        return view('motors');
+    }
+
+    public function help()
+    {
+        return view('help');
+    }
+
+    public function about()
+    {
+        return view('about');
     }
 }

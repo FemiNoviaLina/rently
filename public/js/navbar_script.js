@@ -7,6 +7,17 @@ var showButton = document.getElementById('rent-button');
 var showMenu = document.getElementById('rent-menu');
 var toggleMenu = document.getElementById('menu-toggle');
 var menuList = document.getElementById('menu-list');
+var menuOption = document.getElementsByClassName('rent-menu-option');
+
+menuOption[0].onclick = function (event) {
+  event.preventDefault();
+  window.location.href = window.location.origin + '/rent/cars';
+};
+
+menuOption[1].onclick = function (event) {
+  event.preventDefault();
+  window.location.href = window.location.origin + '/rent/motors';
+};
 
 showButton.onclick = function (event) {
   event.preventDefault();

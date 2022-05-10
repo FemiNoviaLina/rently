@@ -3,5 +3,4 @@
     <div class="content">
         {{ $slot }}
     </div>
-    <x-footer />
 </div>

@@ -1,4 +1,4 @@
-<div class="absolute">
+<div class="sticky">
     <div class="w-screen h-1 bg-lilac-100"></div>
     <div class="navbar flex justify-between">
         <a href="{{ url('/') }}"><div class="navbar-logo basis-1/4 text-lilac-100">Rent.ly</div></a>
@@ -18,10 +18,10 @@
                                     <img src="images/down-arrow.svg" class="inline-block w-5 ml-3 pl-1">
                                     <div id="rent-menu" class="rent-menu z-10 hidden absolute w-40 font-normal">
                                         <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
-                                            <a href="{{ url('/cars') }}"> Rent Car </a>
+                                            Rent Car
                                         </div>
                                         <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
-                                            <a href="{{ url('/motors') }}"> Rent Motorcycle</a>
+                                            Rent Motorcycle
                                         </div>
                                     </div>
                                 @endif

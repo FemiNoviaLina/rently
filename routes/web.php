@@ -22,22 +22,14 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/guide', function () {
-    return view('guide');
-});
+Route::get('/guide', [BasicViewController::class, 'guide']);
 
-Route::get('/cars', function () {
-    return view('cars');
-});
+Route::get('/rent/cars', [BasicViewController::class, 'cars']);
 
-Route::get('/motors', function () {
-    return view('motors');
-});
+Route::get('/rent/motors', [BasicViewController::class, 'motors']);
 
-Route::get('/help', function () {
-    return view('help');
-});
+Route::get('/help', [BasicViewController::class, 'help']);
 
-Route::get('/about', function () {
-    return view('about');
-});
+Route::get('/about', [BasicViewController::class, 'about']);
+
+Route::fallback([BasicViewController::class, 'fallback']);
