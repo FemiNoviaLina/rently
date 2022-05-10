@@ -1,10 +1,12 @@
 <x-guest-layout>
+    <x-navbar selected=""/>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+        <div class="auth-greet p-5">
+            <h1 class="text-3xl text-lilac-100 font-bold text-center">
+                Create Account
+            </h1>
+            <p class="text-center text-bold text-lilac-100">Already have account? <a class="text-black" href="{{ url('/login') }}">Login</a></p>
+        </div>
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
@@ -45,11 +47,7 @@
                                 name="password_confirmation" required />
             </div>
 
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
+            <div class="flex items-center justify-center mt-6 mb-4">
                 <x-button class="ml-4" filled=true>
                     {{ __('Register') }}
                 </x-button>
