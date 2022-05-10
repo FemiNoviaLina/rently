@@ -26,6 +26,5 @@
         </style>
     </head>
     <body class="antialiased" style="width: 100%;">
-        <x-navbar selected="" />
     </body>
 </html>
