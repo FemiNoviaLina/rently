@@ -1,6 +1,6 @@
 <x-base-layout>
     <x-base-body selected="Rent">
-        <div class="vehicles-detail flex mt-2 mx-20">
+        <div class="vehicles-detail flex mt-12 mx-20">
             <div class="details-text lg:basis-1/2 mt-12 sm:basis-full md:basis-full">
                 <h2 class="font-extrabold text-4xl text-lilac-100">Honda Scoopy Smart Key</h2>
                 <h3 class="font-bold text-3xl text-lilac-100 mt-2">IDR 90000/day</h3>

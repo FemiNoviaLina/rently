@@ -1,4 +1,4 @@
-<div class="sticky">
+<div class="fixed mt-0 top-0 inset-x-0 bg-white">
     <div class="w-screen h-1 bg-lilac-100"></div>
     <div class="navbar flex justify-between">
         <a href="{{ url('/') }}"><div class="navbar-logo basis-1/4 text-lilac-100">Rent.ly</div></a>
