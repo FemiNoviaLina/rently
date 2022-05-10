@@ -4,10 +4,15 @@
         <a href="{{ url('/') }}"><div class="navbar-logo basis-1/4 text-lilac-100">Rent.ly</div></a>
         <div class="basis-3/4 flex justify-between sm:max-h-0 md:max-h-0" id="menu-list">
             <div class="navbar-links flex p-3 m-3">
+                @guest
                 <?php $values = array('Rent', 'Guide', 'Help', 'About'); ?>
+                @endguest
+                @auth
+                <?php $values = array('Rent', 'My order', 'Guide', 'Help', 'About'); ?>
+                @endauth
                 @foreach($values as $value)
                     <a href="{{ $isRent($value) ? '' : url(strtolower($value)) }}">
-                        <div id="{{ $isRent($value) ? 'rent-button' : '' }}" class="relative navbar-option mx-9 w-20">
+                        <div id="{{ $isRent($value) ? 'rent-button' : '' }}" class="relative navbar-option mx-6 whitespace-nowrap {{ Auth::check() ? 'w-24' : 'w-20' }}">
                             <p class="inline-block w-8 px-2 text-center"> {{ $value }} </p>
                                 @if($isRent($value)) 
                                     <img src="images/down-arrow.svg" class="inline-block w-5 ml-3 pl-1">
@@ -25,12 +30,20 @@
                 @endforeach
                 </div>
             <div class="cta-button m-2 flex flex-nowrap content-center">
+                @guest
                 <a href="{{ url('/login') }}">
                     <x-button filled=true> {{ __('Login') }}</x-button>
                 </a>
                 <a href="{{ url('/register') }}">
                     <x-button> {{ __('Register') }}</x-button>
                 </a>
+                @endguest
+                @auth
+                <form action="{{ url('/logout') }}" method="post">
+                    @csrf
+                    <x-button filled=true> {{ __('Logout') }}</x-button>
+                </form>
+                @endauth
             </div>
         </div>
         <div class="lg:hidden sm:inline md:inline m-3 cursor-pointer" id="menu-toggle">
