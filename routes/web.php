@@ -19,7 +19,7 @@ Route::get('/', [BasicViewController::class, 'index'])->name('index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -33,6 +33,8 @@ Route::get('/help', [BasicViewController::class, 'help']);
 
 Route::get('/about', [BasicViewController::class, 'about']);
 
-Route::get('/rent/car/{id}', [RentController::class, 'carFormView']);
+Route::middleware(['auth', 'verified'])-> group(function () {
+    Route::get('/rent/car/{id}', [RentController::class, 'carFormView']);
+});
 
 Route::fallback([BasicViewController::class, 'fallback']);
