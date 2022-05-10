@@ -4,6 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
+        <link rel="icon" href="images/logo.ico" type="image/icon type">
+
         <title>Rent.ly</title>
 
         <!-- Fonts -->
@@ -24,7 +26,11 @@
         </style>
     </head>
     <body class="antialiased" style="width: 100%;">
+<<<<<<< HEAD
         <x-navbar selected="guide"></x-navbar>
         <x-footer selected="guide"></x-footer>
+=======
+        <x-navbar selected="guide" />
+>>>>>>> 4d4a9b1e5b03d711c7f216d9e514df7deb2e73fd
     </body>
 </html>
