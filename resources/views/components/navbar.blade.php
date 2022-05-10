@@ -13,15 +13,15 @@
                 @foreach($values as $value)
                     <a href="{{ $isRent($value) ? '' : url(strtolower($value)) }}">
                         <div id="{{ $isRent($value) ? 'rent-button' : '' }}" class="relative navbar-option mx-6 whitespace-nowrap {{ Auth::check() ? 'w-24' : 'w-20' }}">
-                            <p class="inline-block w-8 px-2 text-center"> {{ $value }} </p>
+                            <p class="inline-block w-8 px-2 text-center {{ $isSelected($value) ? 'font-bold' : '' }}"> {{ $value }} </p>
                                 @if($isRent($value)) 
-                                    <img src="images/down-arrow.svg" class="inline-block w-5 ml-3 pl-1">
+                                    <img src="{{ asset('images/down-arrow.svg') }}" class="inline-block w-5 ml-3 pl-1">
                                     <div id="rent-menu" class="rent-menu z-10 hidden absolute w-40 font-normal">
                                         <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
                                             Rent Car
                                         </div>
                                         <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
-                                            Rent Motorcycle
+                                            Rent Motorcycle </a>
                                         </div>
                                     </div>
                                 @endif
@@ -52,5 +52,5 @@
             <div class="w-8 h-0.5 bg-lilac-100 block m-2"></div>
         </div>
     </div>
-    <script src="js/navbar_script.js"></script>
+    <script src="{{ asset('js/navbar_script.js') }}"></script>
 </div>

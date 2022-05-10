@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BasicViewController;
+use App\Http\Controllers\RentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +32,7 @@ Route::get('/rent/motors', [BasicViewController::class, 'motors']);
 Route::get('/help', [BasicViewController::class, 'help']);
 
 Route::get('/about', [BasicViewController::class, 'about']);
+
+Route::get('/rent/car/{id}', [RentController::class, 'carFormView']);
 
 Route::fallback([BasicViewController::class, 'fallback']);

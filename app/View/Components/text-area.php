@@ -4,19 +4,16 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Navbar extends Component
+class text-area extends Component
 {
-
-    public string $selected;
-
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($selected)
+    public function __construct()
     {
-        $this->selected = $selected;
+        //
     }
 
     /**
@@ -26,14 +23,6 @@ class Navbar extends Component
      */
     public function render()
     {
-        return view('components.navbar');
-    }
-
-    public function isRent($option) {
-        return $option == 'Rent';
-    }
-
-    public function isSelected ($option) {
-        return $option == $this->selected;
+        return view('components.text-area');
     }
 }
