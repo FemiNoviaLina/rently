@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BasicViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BasicViewController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/guide', function () {
+    return view('guide');
+});
+
+Route::get('/cars', function () {
+    return view('cars');
+});
+
+Route::get('/motors', function () {
+    return view('motors');
+});
+
+Route::get('/help', function () {
+    return view('help');
+});
+
+Route::get('/help', function () {
+    return view('About');
+});
