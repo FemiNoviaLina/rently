@@ -13,9 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vehicles', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->integer('year')->unsigned();
         });
     }
 
@@ -26,6 +25,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vehicles');
+        Schema::table('vehicles', function (Blueprint $table) {
+            $table->dropColumn('year');
+        });
     }
 };

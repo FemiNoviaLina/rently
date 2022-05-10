@@ -14,7 +14,7 @@ use App\Http\Controllers\BasicViewController;
 |
 */
 
-Route::get('/', [BasicViewController::class, 'index']);
+Route::get('/', [BasicViewController::class, 'index'])->name('index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -38,6 +38,6 @@ Route::get('/help', function () {
     return view('help');
 });
 
-Route::get('/help', function () {
-    return view('About');
+Route::get('/about', function () {
+    return view('about');
 });

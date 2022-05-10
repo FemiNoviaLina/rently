@@ -11,8 +11,7 @@ class BasicViewController extends Controller
     {
         $reviews = Review::all()
             ->sortByDesc('created_at')
-            ->take(4)
-            ->get();
+            ->take(4);
 
         return view('welcome', ['reviews' => $reviews]);
     }
