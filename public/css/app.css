@@ -1325,6 +1325,9 @@ select {
 .duration-75 {
   transition-duration: 75ms;
 }
+.duration-500 {
+  transition-duration: 500ms;
+}
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -1425,6 +1428,14 @@ select {
 .hover\:bg-gray-50:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(93 93 148 / var(--tw-bg-opacity));
+}
+.hover\:bg-lilac-200:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(147 149 222 / var(--tw-bg-opacity));
+}
+.hover\:bg-lilac-300:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(169 169 231 / var(--tw-bg-opacity));
 }
 .hover\:text-white:hover {
   --tw-text-opacity: 1;

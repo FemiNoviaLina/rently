@@ -7,7 +7,11 @@
     'p-2',
     'm-1',
     'font-bold',
-    'rounded-cust'
+    'rounded-cust',
+    'hover:bg-lilac-200',
+    'hover:text-white'=> !$filled,
+    'transition',
+    'duration-500'
 ])>
     {{ $slot }}
 </button>
