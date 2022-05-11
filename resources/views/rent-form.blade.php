@@ -41,11 +41,11 @@
                     <div class="date-time flex">
                         <div class="date basis-6/12">
                             <x-label for="pickup-date" value="Pick Up Date" class="block font-bold text-base pt-4"/>
-                            <x-input id="pickup-date" class="block" type="date" name="pickup-time" value="" required />
+                            <x-input id="pickup-date" class="block" type="date" name="pickup-date" value="{{ date('Y-m-d') }}" required />
                         </div>
                         <div class="time basis-3/12 ml-8">
                             <x-label for="pickup-time" value="Pick Up Time" class="block font-bold text-base pt-4"/>
-                            <x-input id="pickup-time" class="block" type="time" name="pickup-date" value="" required />
+                            <x-input id="pickup-time" class="block" type="time" name="pickup-time" value="{{ explode(' ', gmdate('Y-m-d h:i \G\M\T'))[1] }}" required />
                         </div>
                     </div>
                     <x-label for="pickup-location" value="Pickup Location" class="block font-bold text-base pt-4"/>
@@ -73,11 +73,11 @@
                     <div class="date-time flex">    
                         <div class="date basis-6/12">
                             <x-label for="dropoff-date" value="Pick Up Date" class="block font-bold text-base pt-4"/>
-                            <x-input id="dropoff-date" class="block" type="date" name="dropoff-time" value="" required />
+                            <x-input id="dropoff-date" class="block" type="date" name="dropoff-date" value="{{ date('Y-m-d', strtotime('tomorrow')) }}" required />
                         </div>
                         <div class="time basis-3/12 ml-8">
                             <x-label for="dropoff-time" value="Pick Up Time" class="block font-bold text-base pt-4"/>
-                            <x-input id="dropoff-time" class="block" type="time" name="dropoff-date" value="" required />
+                            <x-input id="dropoff-time" class="block" type="time" name="dropoff-time" value="{{ explode(' ', gmdate('Y-m-d h:i \G\M\T'))[1] }}" required />
                         </div>
                     </div>
                     <x-label for="dropoff-location" value="Drop off Location" class="block font-bold text-base pt-4"/>

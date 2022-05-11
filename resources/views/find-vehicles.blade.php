@@ -6,13 +6,13 @@
                 <form action="" method="post" class="px-20 mt-8">
                     <x-label for="pickup" value="Pick up" class="block font-bold text-base mt-6"/>
                     <div class="date-time flex">
-                        <x-input id="pickup-date" class="block basis-8/12" type="date" name="pickup-time" value="" required />
-                        <x-input id="pickup-time" class="block basis-4/12 ml-4" type="time" name="pickup-date" value="" required />
+                        <x-input id="pickup-date" class="block basis-8/12" type="date" name="pickup-time" value="{{ date('Y-m-d') }}" required />
+                        <x-input id="pickup-time" class="block basis-4/12 ml-4" type="time" name="pickup-date" value="{{ explode(' ', gmdate('Y-m-d h:i \G\M\T'))[1] }}" required />
                     </div>
                     <x-label for="dropoff" value="Drop off" class="block font-bold text-base mt-6"/>
                     <div class="date-time flex">
-                        <x-input id="dropoff-date" class="block basis-8/12" type="date" name="dropoff-time" value="" required />
-                        <x-input id="dropoff-time" class="block basis-4/12 ml-4" type="time" name="dropoff-date" value="" required />
+                        <x-input id="dropoff-date" class="block basis-8/12" type="date" name="dropoff-time" value="{{ date('Y-m-d', strtotime('tomorrow')) }}" required />
+                        <x-input id="dropoff-time" class="block basis-4/12 ml-4" type="time" name="dropoff-date" value="{{ explode(' ', gmdate('Y-m-d h:i \G\M\T'))[1] }}" required />
                     </div>
                     <div class="mt-6 flex justify-center">
                         <x-button filled="true">Rent Now</x-button>

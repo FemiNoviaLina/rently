@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Review;
+use App\Models\SubscriptionEmail;
 
 use Illuminate\Http\Request;
 
@@ -44,5 +45,14 @@ class BasicViewController extends Controller
     public function about()
     {
         return view('about');
+    }
+
+    public function subscribe() {
+        $email = request()->input('email');
+        $subscription = SubscriptionEmail::firstOrCreate(['email' => $email]);
+
+        $redirect_url = request()->header('referer');
+
+        return redirect($redirect_url);
     }
 }
