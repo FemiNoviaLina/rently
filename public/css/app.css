@@ -604,16 +604,6 @@ select {
 .relative {
   position: relative;
 }
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-}
-.inset-0 {
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-}
 .inset-x-0 {
   left: 0px;
   right: 0px;
@@ -678,6 +668,9 @@ select {
 .mt-3 {
   margin-top: 0.75rem;
 }
+.mt-0 {
+  margin-top: 0px;
+}
 .mt-6 {
   margin-top: 1.5rem;
 }
@@ -735,8 +728,8 @@ select {
 .-mr-2 {
   margin-right: -0.5rem;
 }
-.mt-0 {
-  margin-top: 0px;
+.mt-20 {
+  margin-top: 5rem;
 }
 .block {
   display: block;
@@ -843,6 +836,12 @@ select {
 .w-4 {
   width: 1rem;
 }
+.w-4\/6 {
+  width: 66.666667%;
+}
+.w-3\/6 {
+  width: 50%;
+}
 .max-w-xl {
   max-width: 36rem;
 }
@@ -851,6 +850,21 @@ select {
 }
 .max-w-7xl {
   max-width: 80rem;
+}
+.max-w-lg {
+  max-width: 32rem;
+}
+.max-w-md {
+  max-width: 28rem;
+}
+.max-w-2xl {
+  max-width: 42rem;
+}
+.max-w-5xl {
+  max-width: 64rem;
+}
+.max-w-4xl {
+  max-width: 56rem;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -872,6 +886,12 @@ select {
 }
 .basis-3\/12 {
   flex-basis: 25%;
+}
+.basis-8\/12 {
+  flex-basis: 66.666667%;
+}
+.basis-4\/12 {
+  flex-basis: 33.333333%;
 }
 .origin-top-left {
   transform-origin: top left;
@@ -1103,6 +1123,26 @@ select {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.px-10 {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+}
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+.py-20 {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+.px-16 {
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+.px-14 {
+  padding-left: 3.5rem;
+  padding-right: 3.5rem;
+}
 .pl-1 {
   padding-left: 0.25rem;
 }
@@ -1138,9 +1178,6 @@ select {
 }
 .pb-1 {
   padding-bottom: 0.25rem;
-}
-.pt-6 {
-  padding-top: 1.5rem;
 }
 .text-center {
   text-align: center;

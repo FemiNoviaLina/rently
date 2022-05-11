@@ -33,6 +33,8 @@ Route::get('/help', [BasicViewController::class, 'help']);
 
 Route::get('/about', [BasicViewController::class, 'about']);
 
+Route::get('/rent/cars', [RentController::class, 'findVehicleForm']);
+
 Route::middleware(['auth', 'verified'])-> group(function () {
     Route::get('/rent/car/{id}', [RentController::class, 'carFormView']);
 });

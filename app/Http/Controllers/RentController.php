@@ -9,4 +9,8 @@ class RentController extends Controller
     public function carFormView() {
         return view('rent-form');
     }
+
+    public function findVehicleForm() {
+        return view('find-vehicles');
+    }
 }
