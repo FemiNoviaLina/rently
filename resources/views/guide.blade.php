@@ -21,7 +21,7 @@
                 Rules for All Renters
             </a>
         </div>
-        <div class="mt-4 mb-20 mx-20 px-20 py-10 bg-white shadow-md rounded-lg ">
+        <div class="mt-4 mb-20 px-20 py-10 bg-white shadow-md rounded-lg w-full max-w-7xl m-auto">
             <ol class="relative border-l-2 border-lilac-100 ">                  
                 <li class="mb-10 ml-4">
                     <div class="absolute w-8 h-8 bg-gray-200 rounded-full text-center font-bold text-white pt-1 -left-4 border border-lilac-100 bg-lilac-100">1</div>

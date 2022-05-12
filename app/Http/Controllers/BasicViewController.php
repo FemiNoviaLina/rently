@@ -29,12 +29,12 @@ class BasicViewController extends Controller
 
     public function cars()
     {
-        return view('cars');
+        return view('vehicles-list');
     }
 
     public function motors()
     {
-        return view('motors');
+        return view('vehicles-list');
     }
 
     public function help()
