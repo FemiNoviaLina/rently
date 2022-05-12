@@ -25,7 +25,7 @@ require __DIR__.'/auth.php';
 
 Route::get('/guide', [BasicViewController::class, 'guide']);
 
-Route::get('/rent/cars', [BasicViewController::class, 'cars']);
+Route::get('/rent/car-list', [BasicViewController::class, 'cars']);
 
 Route::get('/rent/motors', [BasicViewController::class, 'motors']);
 
