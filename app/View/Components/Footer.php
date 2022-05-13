@@ -6,6 +6,8 @@ use Illuminate\View\Component;
 
 class Footer extends Component
 {
+    public $success = "";
+
     /**
      * Create a new component instance.
      *

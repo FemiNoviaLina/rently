@@ -5,11 +5,14 @@
                 <div class="mb-5">
                     <a href="{{ url('/') }} "><div class="navbar-logo basis-1/4 text-lilac-100">Rent.ly</div></a>
                     <p class="text-gray-50 font-semibold ml-2.5 mt-8">sign up for offers and more</p>
-                    <div class="flex ml-2.5">
-                        <input type="email" placeholder="Enter your email here" class="px-2 border-gray-50 focus:ring focus:ring-lilac-200 focus:ring-opacity-50">
-                        <button class="py-2" style="background-color: #5D5D94;">
-                            <svg class="fill-current w-6 h-4 mx-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="white"/></svg>
-                        </button>
+                    <div>
+                        <form action="{{ route('email-subs') }}" method="post" class="flex ml-2.5">
+                            @csrf
+                            <input type="email" placeholder="Enter your email here" class="px-2 border-gray-50 focus:ring focus:ring-lilac-200 focus:ring-opacity-50" name="email">
+                            <button class="py-2 hover:bg-lilac-100 transition duration-500 bg-gray-50">
+                                <svg class="fill-current w-6 h-4 mx-2 hover:bg-lilac-100 transition duration-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8 0L6.59 1.41L12.17 7H0V9H12.17L6.59 14.59L8 16L16 8L8 0Z" fill="white"/></svg>
+                            </button>
+                        </form>
                     </div>
                 </div>
                 <div class="mb-5 ml-10 pl-10">

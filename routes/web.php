@@ -15,24 +15,45 @@ use App\Http\Controllers\RentController;
 |
 */
 
-Route::get('/', [BasicViewController::class, 'index'])->name('index');
-
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
-Route::get('/guide', [BasicViewController::class, 'guide']);
+Route::get('/', [BasicViewController::class, 'getIndex'])->name('index');
 
-Route::get('/rent/cars', [BasicViewController::class, 'cars']);
+Route::post('/subscribe', [BasicViewController::class, 'subscribe'])->name('email-subs');
 
-Route::get('/rent/motors', [BasicViewController::class, 'motors']);
+Route::get('/guide', [BasicViewController::class, 'getGuide']);
 
-Route::get('/help', [BasicViewController::class, 'help']);
+Route::get('/rules', [BasicViewController::class, 'getRules']);
 
-Route::get('/about', [BasicViewController::class, 'about']);
+Route::get('/help', [BasicViewController::class, 'getHelp']);
 
-Route::get('/rent/car/{id}', [RentController::class, 'carFormView']);
+Route::get('/about', [BasicViewController::class, 'getAbout']);
+
+Route::get('/me/orders', [UserController::class, 'getUserOrders']);
+
+Route::get('/me/profile', [UserController::class, 'getUserProfile']);
+
+Route::get('/find/motor', [RentController::class, 'getFindVehicles']);
+
+Route::get('/find/car', [RentController::class, 'getFindCar']);
+
+Route::get('/rent/motors', [RentController::class, 'getRentMotors']);
+
+Route::get('/rent/cars', [RentController::class, 'getRentCars']);
+
+Route::middleware(['auth', 'verified'])-> group(function () {
+    Route::get('/rent/car/{id}', [RentController::class, 'getRentCarForm']);
+    Route::get('/rent/motor/{id}', [RentController::class, 'getRentMotorForm']);
+});
+
+Route::middleware(['auth', 'admin.authenticated'])-> group(function () {
+    Route::get('/dashboard/customers', [AdminController::class, 'getCustomersDashboard']);
+    Route::get('/dashboard/orders', [AdminController::class, 'getOrdersDashboard']);
+    Route::get('/dashboard/vehicles', [AdminController::class, 'getVehiclesDashboard']);
+});
 
 Route::fallback([BasicViewController::class, 'fallback']);
