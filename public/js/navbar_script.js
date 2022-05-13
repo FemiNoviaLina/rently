@@ -11,12 +11,12 @@ var menuOption = document.getElementsByClassName('rent-menu-option');
 
 menuOption[0].onclick = function (event) {
   event.preventDefault();
-  window.location.href = window.location.origin + '/rent/cars';
+  window.location.href = window.location.origin + '/find/car';
 };
 
 menuOption[1].onclick = function (event) {
   event.preventDefault();
-  window.location.href = window.location.origin + '/rent/motors';
+  window.location.href = window.location.origin + '/find/motor';
 };
 
 showButton.onclick = function (event) {

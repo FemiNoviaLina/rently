@@ -16,12 +16,12 @@
                             <p class="inline-block w-8 px-2 text-center {{ $isSelected($value) ? 'font-bold' : '' }}"> {{ $value }} </p>
                                 @if($isRent($value)) 
                                     <img src="{{ asset('images/down-arrow.svg') }}" class="inline-block w-5 ml-3 pl-1">
-                                    <div id="rent-menu" class="rent-menu z-10 hidden absolute w-40 font-normal">
+                                    <div id="rent-menu" class="rent-menu z-10 hidden absolute w-40 font-normal bg-white">
                                         <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
                                             Rent Car
                                         </div>
                                         <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
-                                            Rent Motorcycle </a>
+                                            Rent Motorcycle
                                         </div>
                                     </div>
                                 @endif
@@ -39,6 +39,14 @@
                 </a>
                 @endguest
                 @auth
+                <a href="{{ '/me/profile' }}"><div class="mx-2 my-1 border border-black px-2 py-1 rounded-lg w-20 h-11 text-ellipsis overflow-hidden">
+                    @if(auth()->user()->hasRole('admin'))
+                    <p class="text-xs">Admin</p>
+                    @else
+                    <p class="text-xs">Customer</p>
+                    @endif
+                    <p class="text-sm font-bold text-lilac-100">{{ auth()->user()->name }}</p>
+                </div></a>
                 <form action="{{ url('/logout') }}" method="post">
                     @csrf
                     <x-button filled=true> {{ __('Logout') }}</x-button>

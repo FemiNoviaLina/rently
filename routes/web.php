@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BasicViewController;
 use App\Http\Controllers\RentController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,8 @@ Route::get('/about', [BasicViewController::class, 'getAbout']);
 Route::get('/me/orders', [UserController::class, 'getUserOrders']);
 
 Route::get('/me/profile', [UserController::class, 'getUserProfile']);
+
+Route::post('/me/profile', [UserController::class, 'updateProfile']);
 
 Route::get('/find/motor', [RentController::class, 'getFindMotor']);
 

@@ -34,7 +34,7 @@ class RentController extends Controller
 
     public function getFindMotor()
     {
-        return view('find-vehicles');
+        return view('find-vehicles', ['type' => 'Motor']);
     }
 
     public function getRentCarForm()
@@ -49,11 +49,11 @@ class RentController extends Controller
 
     public function getRentCars()
     {
-        return view('vehicles-list', ['vehicles' => session('vehicles'), 'type' => 'Car']);
+        return view('vehicles-list', ['vehicles' => session('vehicles'), 'type' => 'car']);
     }
 
     public function getRentMotors()
     {
-        return view('vehicles-list');
+        return view('vehicles-list', ['vehicles' => session('vehicles'), 'type' => 'motor']);
     }
 }
