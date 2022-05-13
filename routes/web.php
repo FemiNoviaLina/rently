@@ -37,13 +37,17 @@ Route::get('/me/orders', [UserController::class, 'getUserOrders']);
 
 Route::get('/me/profile', [UserController::class, 'getUserProfile']);
 
-Route::get('/find/motor', [RentController::class, 'getFindVehicles']);
+Route::get('/find/motor', [RentController::class, 'getFindMotor']);
 
 Route::get('/find/car', [RentController::class, 'getFindCar']);
 
-Route::get('/rent/motors', [RentController::class, 'getRentMotors']);
+Route::post('/find/{type}', [RentController::class, 'findVehicles']);
 
-Route::get('/rent/cars', [RentController::class, 'getRentCars']);
+Route::post('/find/motor', [RentController::class, 'findMotor']);
+
+Route::get('/rent/motors', [RentController::class, 'getRentMotors'])->name('rent-motors');
+
+Route::get('/rent/cars', [RentController::class, 'getRentCars'])->name('rent-cars');
 
 Route::middleware(['auth', 'verified'])-> group(function () {
     Route::get('/rent/car/{id}', [RentController::class, 'getRentCarForm']);
