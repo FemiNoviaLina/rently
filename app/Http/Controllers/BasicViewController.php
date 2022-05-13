@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class BasicViewController extends Controller
 {
-    public function index()
+    public function getIndex()
     {
         $reviews = Review::all()
             ->sortByDesc('created_at')
@@ -22,27 +22,22 @@ class BasicViewController extends Controller
         abort(404);
     }
 
-    public function guide()
+    public function getGuide()
     {
         return view('guide');
     }
 
-    public function cars()
+    public function getRules()
     {
-        return view('vehicles-list');
+        return view('rules');
     }
 
-    public function motors()
-    {
-        return view('vehicles-list');
-    }
-
-    public function help()
+    public function getHelp()
     {
         return view('help');
     }
 
-    public function about()
+    public function getAbout()
     {
         return view('about');
     }
