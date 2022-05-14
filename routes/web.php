@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BasicViewController;
 use App\Http\Controllers\RentController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,13 +39,19 @@ Route::get('/me/orders', [UserController::class, 'getUserOrders']);
 
 Route::get('/me/profile', [UserController::class, 'getUserProfile']);
 
-Route::get('/find/motor', [RentController::class, 'getFindVehicles']);
+Route::post('/me/profile', [UserController::class, 'updateProfile']);
+
+Route::get('/find/motor', [RentController::class, 'getFindMotor']);
 
 Route::get('/find/car', [RentController::class, 'getFindCar']);
 
-Route::get('/rent/motors', [RentController::class, 'getRentMotors']);
+Route::post('/find/{type}', [RentController::class, 'findVehicles']);
 
-Route::get('/rent/cars', [RentController::class, 'getRentCars']);
+Route::post('/find/motor', [RentController::class, 'findMotor']);
+
+Route::get('/rent/motors', [RentController::class, 'getRentMotors'])->name('rent-motors');
+
+Route::get('/rent/cars', [RentController::class, 'getRentCars'])->name('rent-cars');
 
 Route::get('/list/cars', [BasicViewController::class, 'getList']);
 
