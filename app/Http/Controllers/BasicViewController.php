@@ -42,6 +42,11 @@ class BasicViewController extends Controller
         return view('about');
     }
 
+    public function getList()
+    {
+        return view('vehicles-list');
+    }
+
     public function subscribe() {
         $email = request()->input('email');
         $subscription = SubscriptionEmail::firstOrCreate(['email' => $email]);

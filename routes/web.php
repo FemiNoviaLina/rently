@@ -45,6 +45,8 @@ Route::get('/rent/motors', [RentController::class, 'getRentMotors']);
 
 Route::get('/rent/cars', [RentController::class, 'getRentCars']);
 
+Route::get('/list/cars', [BasicViewController::class, 'getList']);
+
 Route::middleware(['auth', 'verified'])-> group(function () {
     Route::get('/rent/car/{id}', [RentController::class, 'getRentCarForm']);
     Route::get('/rent/motor/{id}', [RentController::class, 'getRentMotorForm']);
