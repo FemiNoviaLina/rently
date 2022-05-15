@@ -4,16 +4,18 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class text-area extends Component
+class TextArea extends Component
 {
+
+    public $value;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($value="")
     {
-        //
+        $this->value = $value;
     }
 
     /**

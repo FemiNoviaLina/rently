@@ -5,7 +5,7 @@
                 <h2 class="text-lilac-200 font-bold text-4xl">Available {{ $type }}s</h2>
                 <p class="text-lilac-100 font-bold">{{ count($vehicles) }} Vehicles</p>
             </div>
-            <form action="{{ '/'.$type.'s' }}" method="get" class=>
+            <form action="{{ '/'.strtolower($type).'s' }}" method="get" class=>
                 <div class="flex flex-wrap max-w-3xl mx-10 py-10 gap-5 px-10 justify-center bg-white rounded-xl shadow-md">
                     <div class="flex items-center font-bold text-lilac-200">
                         <p>Filter by</p>
@@ -18,7 +18,7 @@
                             Brand
                         </label>
                         <div class="inline-block w-32">
-                            @if($type == 'motor')
+                            @if($type == 'Motor')
                             <?php $brands = array('All', 'Honda', 'Suzuki', 'Yamaha') ?>
                             @else
                             <?php $brands = array('All', 'Honda', 'Suzuki', 'Toyota', 'Daihatsu', 'Nissan') ?>
@@ -62,7 +62,7 @@
         <div class="flex flex-wrap flex-row justify-around mx-10 my-10">
             @foreach($vehicles as $vehicle)
             <a href="{{ '/rent/'.strtolower($type).'/'.$vehicle->id }}">
-                <div class="w-80 p-8 rounded-lg overflow-hidden shadow-md">
+                <div class="w-80 p-8 rounded-lg overflow-hidden shadow-md h-full">
                     <div>
                         <img class="w-full h-40 object-cover shadow" src="{{ '/storage/images/'.$vehicle->photo }}" alt="">
                     </div>

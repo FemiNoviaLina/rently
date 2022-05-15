@@ -31,7 +31,7 @@ return new class extends Migration
             $table->string('id_card_2');
             $table->string('driver_license');
             $table->float('total_price', 10, 2);
-            $table->string('note');
+            $table->string('note')->nullable();
             $table->enum('order_status', ['PENDING', 'REJECTED', 'WAITING_FOR_PAYMENT', 'PAYMENT_DONE', 'CANCELED', 'COMPLETED']);
             $table->string('payment_method')->nullable();
             $table->string('transaction_id')->nullable();

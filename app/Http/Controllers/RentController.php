@@ -10,6 +10,8 @@ use App\Models\Vehicle;
 
 use App\Models\Order;
 
+use DateTime;
+
 class RentController extends Controller
 {
     public function getFindCar()
@@ -70,5 +72,60 @@ class RentController extends Controller
         if(session('vehicles') == null) return redirect()->route(('find-motor'));
 
         return view('vehicles-list', ['vehicles' => session('vehicles'), 'pickup_date' => session('pickup_date'), 'dropoff_date' => session('dropoff_date'), 'type' => 'Motor']);
+    }
+
+    public function rentVehicle($type, $id)
+    {
+        $request = request()->input();
+
+        $vehicle = Vehicle::find($id);
+
+        $id_card_filename = $id . '_'.auth()->user()->id.'_id_card'. date('Y-m-d H-i-s'). '.' . request()->file('id_card')->getClientOriginalExtension();
+        $id_card = request()->file('id_card')->storeAs('id-card', $id_card_filename);
+        
+        $id_card_2_filename = $id . '_'.auth()->user()->id.'_id_card_2'. date('Y-m-d H-i-s'). '.' . request()->file('id_card_2')->extension();
+        $id_card_2 = request()->file('id_card_2')->storeAs('id-card', $id_card_2_filename, 'local');
+
+        $driver_license_filename = $id . '_'.auth()->user()->id.'_driver_license'. date('Y-m-d H-i-s'). '.' . request()->file('driver_license')->extension();
+        $driver_license = request()->file('driver_license')->storeAs('driver-license', $driver_license_filename, 'local');
+
+        $pickup_day = new DateTime($request['dropoff_date']);
+        $dropoff_day = new DateTime($request['pickup_date']);
+        $rent_days = $pickup_day->diff($dropoff_day)->days;
+        $rent_price = $rent_days * $vehicle->price;
+
+        $data = [
+            'vehicle_id' => $id,
+            'user_id' => auth()->user()->id,
+            'pickup_date' => $request['pickup_date'],
+            'pickup_time' => $request['pickup_time'],
+            'pickup_address' => $request['pickup_location'],
+            'dropoff_date' => $request['dropoff_date'],
+            'dropoff_time' => $request['dropoff_time'],
+            'dropoff_address' => $request['dropoff_location'],
+            'phone_1' => $request['phone_1'],
+            'phone_2' => $request['phone_2'],
+            'address_id' => $request['address_id'],
+            'address_mlg' => $request['address_mlg'],
+            'id_card' => $id_card_filename,
+            'id_card_2' => $id_card_2_filename,
+            'driver_license' => $driver_license_filename,
+            'total_price' => $rent_price,
+            'note' => $request['note'],
+            'order_status' => 'PENDING',
+        ];
+
+        $order = Order::create($data);
+
+        return redirect()->route('user-orders');
+    }
+
+    public function getUserOrders()
+    {
+        $orders = Order::join('vehicles', 'orders.vehicle_id', '=', 'vehicles.id')
+        ->select("orders.id", "orders.order_status", "orders.created_at", "vehicles.name")
+        ->where('user_id', '=', auth()->user()->id)->get();
+
+        return view('order-history', ['orders' => $orders]);
     }
 }

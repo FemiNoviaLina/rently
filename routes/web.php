@@ -38,7 +38,7 @@ Route::get('/help', [BasicViewController::class, 'getHelp']);
 
 Route::get('/about', [BasicViewController::class, 'getAbout']);
 
-Route::get('/me/orders', [UserController::class, 'getUserOrders']);
+Route::get('/me/orders', [RentController::class, 'getUserOrders'])->name('user-orders');
 
 Route::get('/me/profile', [UserController::class, 'getUserProfile']);
 
@@ -59,6 +59,7 @@ Route::get('/list/cars', [BasicViewController::class, 'getList']);
 Route::middleware(['auth', 'verified'])-> group(function () {
     Route::get('/rent/car/{id}', [RentController::class, 'getRentForm']);
     Route::get('/rent/motor/{id}', [RentController::class, 'getRentForm']);
+    Route::post('/rent/{type}/{id}', [RentController::class, 'rentVehicle'])->where('type', '\b(motor|car)\b');
 });
 
 Route::middleware(['auth', 'admin.authenticated'])-> group(function () {

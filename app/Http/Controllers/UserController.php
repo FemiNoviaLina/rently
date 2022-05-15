@@ -11,11 +11,6 @@ class UserController extends Controller
         return view('user-profile');
     }
 
-    public function getUserOrders()
-    {
-        return view('order-history');
-    }
-
     public function updateProfile()
     {
         $request = request()->input();

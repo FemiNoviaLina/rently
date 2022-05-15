@@ -17,7 +17,8 @@ module.exports = {
             transparent: 'transparent',
             current: 'currentColor',
             'black': '#000000',
-            'white': '#ffffff',
+            'white': '#FFFFFF',
+            'red': '#FF5050',
             'gray': {
                 50:'#5D5D94',
                 100:'#E2E2E2',
@@ -29,7 +30,7 @@ module.exports = {
                 300: '#A9A9E7',
             },
             'mint': {
-                100: '#66E9AF',
+                100: '#25DE8D',
                 200: '#83EEBF',
                 300: '#A6F1D0'
             }
