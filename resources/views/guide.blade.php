@@ -14,7 +14,7 @@
                 </svg>
                 How to Rent A Vehicle
             </a> 
-            <a href="{{ url('/guide/rules') }}" class="py-2 px-10 font-bold text-lilac-100 bg-white rounded-r-sm border border-lilac-100 hover:bg-lilac-300 hover:text-white transition duration-500">
+            <a href="{{ url('/rules') }}" class="py-2 px-10 font-bold text-lilac-100 bg-white rounded-r-sm border border-lilac-100 hover:bg-lilac-300 hover:text-white transition duration-500">
                 <svg class="fill-lilac-100 inline mr-2" width="32" height="32" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M23.5002 4.70001C33.8872 4.70001 42.3002 13.113 42.3002 23.5C42.3002 33.887 33.8872 42.3 23.5002 42.3C13.1132 42.3 4.7002 33.887 4.7002 23.5C4.7002 13.113 13.1132 4.70001 23.5002 4.70001ZM26.1557 26.743L26.9782 11.562H20.0222L20.8447 26.743H26.1557ZM25.9442 34.639C26.5082 34.0985 26.8137 33.3465 26.8137 32.383C26.8137 31.396 26.5317 30.644 25.9677 30.1035C25.4037 29.563 24.5812 29.281 23.4767 29.281C22.3722 29.281 21.5497 29.563 20.9622 30.1035C20.3747 30.644 20.0927 31.396 20.0927 32.383C20.0927 33.3465 20.3982 34.0985 20.9857 34.639C21.5967 35.1795 22.4192 35.438 23.4767 35.438C24.5342 35.438 25.3567 35.1795 25.9442 34.639Z"/>
                 </svg>    

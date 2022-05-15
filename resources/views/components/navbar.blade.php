@@ -1,4 +1,4 @@
-<div class="fixed mt-0 top-0 inset-x-0 bg-white">
+<div class="fixed mt-0 top-0 inset-x-0 bg-white z-10">
     <div class="w-screen h-1 bg-lilac-100"></div>
     <div class="navbar flex justify-between">
         <a href="{{ url('/') }}"><div class="navbar-logo basis-1/4 text-lilac-100">Rent.ly</div></a>
@@ -9,7 +9,7 @@
                 @endguest
                 @auth
                     @if(auth()->user()->hasRole('user'))
-                    <?php $values = array('Rent' => 'rent', 'My order' => 'me/order', 'Guide' => 'guide', 'Help' => 'help', 'About' => 'about'); ?>
+                    <?php $values = array('Rent' => 'rent', 'My order' => 'me/orders', 'Guide' => 'guide', 'Help' => 'help', 'About' => 'about'); ?>
                     @else
                     <?php $values = array('Order' => 'dashboard/orders', 'Product' => 'dashboard/vehicles', 'Customer' => 'dashboard/customers') ?>
                     @endif 

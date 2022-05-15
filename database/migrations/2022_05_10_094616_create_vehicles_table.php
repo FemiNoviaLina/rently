@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('vehicles', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('brand_id')->references('id')->on('brands');
+            $table->string('brand');
             $table->string('transmission');
             $table->string('fuel');
             $table->integer('cc')->unsigned();

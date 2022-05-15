@@ -6,6 +6,9 @@ use App\Http\Controllers\RentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,15 +42,13 @@ Route::get('/me/orders', [UserController::class, 'getUserOrders']);
 
 Route::get('/me/profile', [UserController::class, 'getUserProfile']);
 
-Route::post('/me/profile', [UserController::class, 'updateProfile']);
+Route::post('/me/profile', [UserController::class, 'updateProfile'])->name('update-profile');
 
-Route::get('/find/motor', [RentController::class, 'getFindMotor']);
+Route::get('/find/motor', [RentController::class, 'getFindMotor'])->name('find-motor');
 
-Route::get('/find/car', [RentController::class, 'getFindCar']);
+Route::get('/find/car', [RentController::class, 'getFindCar'])->name('find-car');
 
-Route::post('/find/{type}', [RentController::class, 'findVehicles']);
-
-Route::post('/find/motor', [RentController::class, 'findMotor']);
+Route::get('/{type}', [RentController::class, 'findVehicles'])->where('type', '\b(motors|cars)\b');
 
 Route::get('/rent/motors', [RentController::class, 'getRentMotors'])->name('rent-motors');
 
@@ -56,14 +57,28 @@ Route::get('/rent/cars', [RentController::class, 'getRentCars'])->name('rent-car
 Route::get('/list/cars', [BasicViewController::class, 'getList']);
 
 Route::middleware(['auth', 'verified'])-> group(function () {
-    Route::get('/rent/car/{id}', [RentController::class, 'getRentCarForm']);
-    Route::get('/rent/motor/{id}', [RentController::class, 'getRentMotorForm']);
+    Route::get('/rent/car/{id}', [RentController::class, 'getRentForm']);
+    Route::get('/rent/motor/{id}', [RentController::class, 'getRentForm']);
 });
 
 Route::middleware(['auth', 'admin.authenticated'])-> group(function () {
     Route::get('/dashboard/customers', [AdminController::class, 'getCustomersDashboard']);
     Route::get('/dashboard/orders', [AdminController::class, 'getOrdersDashboard']);
     Route::get('/dashboard/vehicles', [AdminController::class, 'getVehiclesDashboard']);
+});
+
+Route::get('/test-up', function() {
+    return view('test-up');
+});
+
+Route::post('/test-up', function(Request $request) {
+    $path = $request->file('image')->storeAs(
+        'images', 'example.png'
+    );
+});
+
+Route::get('/uploaded', function() {
+    return view('test-view');
 });
 
 Route::fallback([BasicViewController::class, 'fallback']);

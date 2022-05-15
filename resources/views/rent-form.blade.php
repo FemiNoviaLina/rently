@@ -1,43 +1,43 @@
 <x-base-layout>
     <x-base-body selected="Rent">
-        <div class="vehicles-detail flex mt-12 mx-20">
+        <div class="vehicles-detail flex flex-wrap mt-12 mx-20">
             <div class="details-text lg:basis-1/2 mt-12 sm:basis-full md:basis-full">
-                <h2 class="font-extrabold text-4xl text-lilac-100">Honda Scoopy Smart Key</h2>
-                <h3 class="font-bold text-3xl text-lilac-100 mt-2">IDR 90000/day</h3>
-                <div class="mt-2 grid spec-container grid-cols-2 grid-rows-2">
+                <h2 class="font-extrabold text-4xl text-lilac-100">{{ $vehicle->name }}</h2>
+                <h3 class="font-bold text-3xl text-lilac-100 mt-2">IDR {{ $vehicle->price }}/day</h3>
+                <div class="mt-2 grid spec-container lg:grid-cols-2 lg:grid-rows-2">
                     <div class="engine my-2 flex items-center">
-                        <img src="{{ asset('/images/engine-icon.svg') }}" class="inline w-8" alt="trasmission">
-                        <p class="font-bold inline pl-4">Automatic</p>
+                        <img src="{{ asset('/images/engine-icon.svg') }}" class="inline w-8" alt="transmission">
+                        <p class="font-bold inline pl-4">{{ $vehicle->transmission }}</p>
                     </div>
                     <div class="cc my-2 flex items-center">
                         <img src="{{ asset('/images/gear-icon.svg') }}" class="inline w-8" alt="cc">
-                        <p class="font-bold inline pl-4">110cc</p>
+                        <p class="font-bold inline pl-4">{{ $vehicle->cc }}cc</p>
                     </div>
                     <div class="year my-2 flex items-center">
                         <img src="{{ asset('/images/time-icon.svg') }}" class="inline w-8" alt="year">
-                        <p class="font-bold inline pl-4">2022</p>
+                        <p class="font-bold inline pl-4">{{ $vehicle->year }}</p>
                     </div>
                     <div class="fuel my-2 flex items-center">
                         <img src="{{ asset('/images/fuel-icon.svg') }}" class="inline w-8" alt="fuel">
-                        <p class="font-bold inline pl-4">Pertamax</p>
+                        <p class="font-bold inline pl-4">{{ $vehicle->fuel }}</p>
                     </div>
                 </div>
             </div>
             <div class="details-pic lg:basis-1/2 sm:basis-full md:basis-full">
-                <img src="{{ asset('images/motor-photo.png') }}" alt="scoopy" class="w-full h-full">
+                <img src="{{ asset('storage/images/'. $vehicle->photo) }}" alt="scoopy" class="w-4/5 h-4/5 mt-10">
             </div>
         </div>
-        <div class="rent-form mt-4 mx-20 px-20 py-10 bg-white shadow-md rounded-lg ">
+        <div class="w-full max-w-7xl mx-auto rent-form my-4 px-20 py-10 bg-white shadow-md rounded-lg ">
             <h1 class="font-extrabold text-4xl text-lilac-100">Customer Rent Form</h1>
             <form action="" method="post" class="flex flex-wrap">
                 @csrf
                 <div class="left-col basis-1/2">
                     <x-label for="name" value="Full Name" class="block font-bold text-base pt-4"/>
-                    <x-input id="name" class="block w-4/5" type="text" name="name" value="" required />
+                    <x-input id="name" class="block w-4/5" type="text" name="name" value="{{ auth()->user()->name }}" required />
                     <x-label for="phone-1" value="Phone Number 1" class="block font-bold text-base pt-4"/>
-                    <x-input id="phone-1" class="block w-4/5" type="text" name="phone-1" value="" required />
+                    <x-input id="phone-1" class="block w-4/5" type="text" name="phone-1" value="{{ auth()->user()->phone_1 }}" required />
                     <x-label for="address-id" value="Address (ID)" class="block font-bold text-base pt-4"/>
-                    <x-text-area id="address-id" class="block w-4/5" name="address-id" required />
+                    <x-text-area id="address-id" class="block w-4/5" name="address-id" required>{{ auth()->user()->address_mlg }}</x-text-area>
                     <div class="date-time flex">
                         <div class="date basis-6/12">
                             <x-label for="pickup-date" value="Pick Up Date" class="block font-bold text-base pt-4"/>
@@ -65,11 +65,11 @@
                 </div>
                 <div class="right-col basis-1/2">
                     <x-label for="email" :value="__('Email')" class="block font-bold text-base pt-4" />
-                    <x-input id="email" class="block w-4/5" type="email" name="email" :value="old('email')" required />
+                    <x-input id="email" class="block w-4/5" type="email" name="email" value="{{ auth()->user()->email }}" required />
                     <x-label for="phone-2" value="Phone Number 2" class="block font-bold text-base  pt-4"/>
-                    <x-input id="phone-2" class="block w-4/5" type="text" name="phone-2" value="" required/>
+                    <x-input id="phone-2" class="block w-4/5" type="text" name="phone-2" value="{{ auth()->user()->phone_2 }}" required/>
                     <x-label for="address-mlg" value="Address (Malang)" class="block font-bold text-base  pt-4"/>
-                    <x-text-area id="address-mlg" class="block w-4/5" name="address-mlg" required />
+                    <x-text-area id="address-mlg" class="block w-4/5" name="address-mlg" required>{{ auth()->user()->address_mlg }}</x-text-area>
                     <div class="date-time flex">    
                         <div class="date basis-6/12">
                             <x-label for="dropoff-date" value="Pick Up Date" class="block font-bold text-base pt-4"/>
