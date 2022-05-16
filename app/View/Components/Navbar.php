@@ -33,6 +33,10 @@ class Navbar extends Component
         return $option == 'Rent';
     }
 
+    public function isProduct($option) {
+        return $option == 'Product';
+    }
+
     public function isSelected ($option) {
         return $option == $this->selected;
     }

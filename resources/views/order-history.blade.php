@@ -73,6 +73,11 @@
                 @endif
             </div>
             <div class="flex justify-end">
+                @if($order->order_status == 'WAITING_FOR_PAYMENT')
+                <a href="{{ route('payment-details', [ $order->id ]) }}">
+                    <x-button filled=true>Pay now</x-button>
+                </a>
+                @endif
                 <x-button filled=true>View details</x-button>
             </div>
         </div>

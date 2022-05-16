@@ -128,4 +128,12 @@ class RentController extends Controller
 
         return view('order-history', ['orders' => $orders]);
     }
+
+    public function getPaymentDetails($id)
+    {
+        $method = request()->input('method') ? request()->input('method') : 'BCA Transfer';
+        $order = Order::find($id);
+
+        return view('payment-details', ['order' => $order, 'selected_method' => $method]);
+    }
 }

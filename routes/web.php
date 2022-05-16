@@ -60,12 +60,16 @@ Route::middleware(['auth', 'verified'])-> group(function () {
     Route::get('/rent/car/{id}', [RentController::class, 'getRentForm']);
     Route::get('/rent/motor/{id}', [RentController::class, 'getRentForm']);
     Route::post('/rent/{type}/{id}', [RentController::class, 'rentVehicle'])->where('type', '\b(motor|car)\b');
+    Route::get('/me/order/{id}/pay', [RentController::class, 'getPaymentDetails'])->name('payment-details');
 });
 
 Route::middleware(['auth', 'admin.authenticated'])-> group(function () {
-    Route::get('/dashboard/customers', [AdminController::class, 'getCustomersDashboard']);
-    Route::get('/dashboard/orders', [AdminController::class, 'getOrdersDashboard']);
-    Route::get('/dashboard/vehicles', [AdminController::class, 'getVehiclesDashboard']);
+    Route::get('/dashboard/customers', [AdminController::class, 'getCustomersDashboard'])->name('customers-dahboard');
+    Route::get('/dashboard/orders', [AdminController::class, 'getOrdersDashboard'])->name('orders-dashboard');
+    Route::get('/dashboard/orders/acceptance/{id}', [AdminController::class, 'acceptOrder'])->name('accept-order');
+    Route::get('/dashboard/orders/rejection/{id}', [AdminController::class, 'rejectOrder'])->name('reject-order');
+    Route::get('/dashboard/vehicles/car', [AdminController::class, 'getVehiclesDashboardCar'])->name('vehicles-dashboard-car');
+    Route::get('/dashboard/vehicles/motor', [AdminController::class, 'getVehiclesDashboardMotor'])->name('vehicles-dashboard-motor');
 });
 
 Route::get('/test-up', function() {

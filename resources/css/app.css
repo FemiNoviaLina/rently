@@ -61,6 +61,12 @@
         width: 100%;
     }
 
+    .vehicle-menu {
+        position: static;
+        background-color: white;
+        width: 100%;
+    }
+
     .navbar-option {
         margin: 0;
     }

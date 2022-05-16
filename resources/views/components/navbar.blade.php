@@ -15,17 +15,17 @@
                     @endif 
                 @endauth
                 @foreach($values as $key => $value)
-                    <a href="{{ $isRent($key) ? '' : url($value) }}">
-                        <div id="{{ $isRent($key) ? 'rent-button' : '' }}" class="relative navbar-option mx-6 whitespace-nowrap {{ Auth::check() ? 'w-24' : 'w-20' }}">
-                            <p class="inline-block w-8 px-2 text-center {{ $isSelected($key) ? 'font-bold' : '' }}"> {{ $key }} </p>
-                                @if($isRent($key)) 
+                    <a href="{{ $isRent($key) || $isProduct($key) ? '' : url($value) }}">
+                        <div id="{{ $isRent($key) || $isProduct($key) ? 'rent-button' : '' }}" class="relative navbar-option whitespace-nowrap mx-6 w-24 ">
+                            <p class="inline-block w-12 text-center {{ $isSelected($key) ? 'font-bold' : '' }}"> {{ $key }} </p>
+                                @if($isRent($key) || $isProduct($key)) 
                                     <img src="{{ asset('images/down-arrow.svg') }}" class="inline-block w-5 ml-3 pl-1">
                                     <div id="rent-menu" class="rent-menu z-10 hidden absolute w-40 font-normal bg-white">
                                         <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
-                                            Rent Car
+                                            {{ $isRent($key) ? 'Rent Car' : 'Car' }}
                                         </div>
                                         <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
-                                            Rent Motorcycle
+                                            {{ $isRent($key) ? 'Rent Motorcycle' : 'Motorcycle' }}
                                         </div>
                                     </div>
                                 @endif

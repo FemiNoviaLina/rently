@@ -16,12 +16,22 @@ toggleMenu.onclick = function (event) {
 
 menuOption[0].onclick = function (event) {
   event.preventDefault();
-  window.location.href = window.location.origin + '/find/car';
+
+  if (menuOption[0].innerHTML == 'Rent Car') {
+    window.location.href = window.location.origin + '/find/car';
+  } else {
+    window.location.href = window.location.origin + '/dashboard/vehicles/car';
+  }
 };
 
 menuOption[1].onclick = function (event) {
   event.preventDefault();
-  window.location.href = window.location.origin + '/find/motor';
+
+  if (menuOption[0].innerHTML == 'Rent Car') {
+    window.location.href = window.location.origin + '/find/motor';
+  } else {
+    window.location.href = window.location.origin + '/dashboard/vehicles/motor';
+  }
 };
 
 showButton.onclick = function (event) {

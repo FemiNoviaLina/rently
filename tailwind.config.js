@@ -28,6 +28,7 @@ module.exports = {
                 100: '#7C7DDC',
                 200: '#9395DE',
                 300: '#A9A9E7',
+                400: '#DDDEF5'
             },
             'mint': {
                 100: '#25DE8D',
