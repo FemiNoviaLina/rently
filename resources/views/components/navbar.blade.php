@@ -21,10 +21,10 @@
                                 @if($isRent($key) || $isProduct($key)) 
                                     <img src="{{ asset('images/down-arrow.svg') }}" class="inline-block w-5 ml-3 pl-1">
                                     <div id="rent-menu" class="rent-menu z-10 hidden absolute w-40 font-normal bg-white">
-                                        <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
-                                            {{ $isRent($key) ? 'Rent Car' : 'Car' }}
+                                        <div class="menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
+                                            {{$isRent($key) ? 'Rent Car' : 'Car'}}
                                         </div>
-                                        <div class="rent-menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
+                                        <div class="menu-option px-2 py-1 bg-gray hover:bg-lilac-100 hover:text-white">
                                             {{ $isRent($key) ? 'Rent Motorcycle' : 'Motorcycle' }}
                                         </div>
                                     </div>

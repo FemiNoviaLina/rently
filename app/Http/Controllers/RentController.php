@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\DB;
 
+use Illuminate\Support\Facades\Http;
+
 use App\Models\Vehicle;
 
 use App\Models\Order;
@@ -134,6 +136,120 @@ class RentController extends Controller
         $method = request()->input('method') ? request()->input('method') : 'BCA Transfer';
         $order = Order::find($id);
 
+        if($order->transaction_id) {
+            return redirect()->route('confirm-payment', [$order->id])->with('order', $order);
+        }
+
         return view('payment-details', ['order' => $order, 'selected_method' => $method]);
+    }
+
+    public function getVirtualAccount($id)
+    {
+        $method = request()->input('method');
+        $order = Order::find($id);
+
+        $AUTH_STRING = "Basic " . base64_encode(env('MIDTRANS_SERVER_KEY') . ":");
+
+        $payment_type = array(
+            "BCA Transfer" => "bank_transfer",
+            "BNI Transfer" => "bank_transfer",
+            "BRI Transfer" => "bank_transfer",
+            "Mandiri Transfer" => "echannel",
+            "Permata Transfer" => "permata",
+            "Shopee Pay" => "gopay",
+            "Dana" => "gopay",
+            "OVO" => "gopay",
+            "GoPay" => "gopay"
+        );
+
+        $req_body = [
+            "payment_type" => $payment_type[$method],
+            "transaction_details" => [
+                "order_id" => $order->id,
+                "gross_amount" => $order->total_price,
+            ]
+        ];
+
+        if($payment_type[$method] == 'bank_transfer') {
+            $req_body['bank_transfer']['bank'] = explode(' ', strtolower($method))[0];
+        }
+
+        if($payment_type[$method] == 'echannel') {
+            $req_body['echannel']['bill_info1'] = $order->id;
+            $req_body['echannel']['bill_info2'] = $order->total_price;
+        }
+        
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => $AUTH_STRING
+        ])
+        ->withBody(json_encode($req_body), 'application/json')
+        ->post('https://api.sandbox.midtrans.com/v2/charge');
+
+        $response = $response->json();
+
+        if($response['status_code'] == '201') {
+            if($payment_type[$method] == 'bank_transfer') {
+                $order->virtual_account = $response['va_numbers'][0]['va_number'];
+            } else if ($payment_type[$method] == 'echannel') {
+                $order->virtual_account = $response['bill_key'] . ' ' . $response['bill_code'];
+            } else if ($payment_type[$method] == 'gopay') {
+                $order->qr_link = $response['actions'][0]['url'];
+                $order->deep_link = $response['actions'][1]['url'];
+            } else {
+                $order->virtual_account = $response->json()['permata_va_number'];
+            } 
+
+            $order->transaction_id = $response['transaction_id'];
+            $payment_expiry_time = new DateTime();
+            $payment_expiry_time->modify('+1 day');
+            $order->payment_expiry_time = $payment_expiry_time->format('Y-m-d H:i:s');
+            $order->payment_method = $method;
+        }
+        
+        $order->save();
+
+        if($order->transaction_id) {
+            return redirect()->route('confirm-payment', ['id' => $order->id]);
+        } else {
+            return redirect()->route('payment-details', ['id' => $order->id])->with('error', 'Something went wrong. Please try again later.');
+        }
+    }
+
+    public function getConfirmPayment($id)
+    {
+        $order = Order::find($id);
+
+        if($order->transaction_id) {
+            return view('confirm-payment', ['order' => $order]);
+        } else {
+            return redirect()->route('payment-details', ['id' => $order->id]);
+        }
+    }
+
+    public function checkPayment($id) {
+        $order = Order::find($id);
+
+        $AUTH_STRING = "Basic " . base64_encode(env('MIDTRANS_SERVER_KEY') . ":");
+
+        $response = Http::withHeaders([
+            'Accept' => 'application/json',
+            'Content-Type' => 'application/json',
+            'Authorization' => $AUTH_STRING
+        ])
+        ->get('https://api.sandbox.midtrans.com/v2/' . $order->transaction_id . '/status');
+
+        $response = $response->json();
+        
+        if($response['status_code'] == '200') {
+            if($response['transaction_status'] == 'settlement') {
+                $order->order_status = 'PAYMENT_DONE';
+            }
+        }
+
+        $order->save();
+
+        return redirect()->route('user-orders');
     }
 }

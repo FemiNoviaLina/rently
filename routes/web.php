@@ -61,6 +61,9 @@ Route::middleware(['auth', 'verified'])-> group(function () {
     Route::get('/rent/motor/{id}', [RentController::class, 'getRentForm']);
     Route::post('/rent/{type}/{id}', [RentController::class, 'rentVehicle'])->where('type', '\b(motor|car)\b');
     Route::get('/me/order/{id}/pay', [RentController::class, 'getPaymentDetails'])->name('payment-details');
+    Route::get('/me/order/{id}/va', [RentController::class, 'getVirtualAccount'])->name('get-virtual-account');
+    Route::get('/me/order/{id}/confirm', [RentController::class, 'getConfirmPayment'])->name('confirm-payment');
+    Route::get('/me/order/{id}/check', [RentController::class, 'checkPayment'])->name('check-payment');
 });
 
 Route::middleware(['auth', 'admin.authenticated'])-> group(function () {

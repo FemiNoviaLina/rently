@@ -2,7 +2,7 @@ const showButton = document.getElementById('rent-button');
 const showMenu = document.getElementById('rent-menu');
 const toggleMenu = document.getElementById('menu-toggle'); 
 const menuList = document.getElementById('menu-list');
-const menuOption = document.getElementsByClassName('rent-menu-option');
+const menuOption = document.getElementsByClassName('menu-option');
 
 toggleMenu.onclick = (event) => {
     event.preventDefault();
@@ -11,7 +11,7 @@ toggleMenu.onclick = (event) => {
 
 menuOption[0].onclick = (event) => {
     event.preventDefault();
-    if(menuOption[0].innerHTML == 'Rent Car') {
+    if(menuOption[0].innerHTML.trim() == 'Rent Car') {
         window.location.href = window.location.origin + '/find/car';
     } else {
         window.location.href = window.location.origin + '/dashboard/vehicles/car';
@@ -20,7 +20,7 @@ menuOption[0].onclick = (event) => {
 
 menuOption[1].onclick = (event) => {
     event.preventDefault();
-    if(menuOption[0].innerHTML == 'Rent Car') {
+    if(menuOption[1].innerHTML.trim() == 'Rent Motorcycle') {
         window.location.href = window.location.origin + '/find/motor';
     } else {
         window.location.href = window.location.origin + '/dashboard/vehicles/motor';
