@@ -41,7 +41,7 @@
                 <div class="m-10">
                     <p class="font-bold">PRICING DETAILS</p>
                     <div class="grid lg:grid-rows-2 lg:grid-cols-2 my-2 gap-y-2">
-                        <p>Honda Scoopy Smart Key  x1</p>
+                        <p>{{ $order->name }} </p>
                         <p>IDR {{ $order->total_price - 4500 }}</p>
                         <p>Service Fee</p>
                         <p>IDR 4500</p>

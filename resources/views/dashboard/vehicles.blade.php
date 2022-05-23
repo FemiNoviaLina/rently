@@ -3,7 +3,7 @@
         <div class="mt-24 mx-10 mb-4 text-lilac-100 text-3xl font-bold">
             {{ $type }} Inventory
         </div>
-        <div class="mb-4 flex mx-10">
+        <div class="mb-4 flex mx-10 items-center justify-between">
             <form action="" method="get">
                 <div class="relative">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -14,6 +14,11 @@
                 <x-input id="search-order" class="py-2 text-sm pl-10" type="search" placeholder="Search" name="order_query" value="" autocomplete="on" required />
                 </div>
             </form>
+            <div>
+                <a href="{{ route('add-'.strtolower($type) ) }}">
+                    <button class="bg-mint-100 text-white text-sm rounded-md p-2 mx-1 hover:bg-mint-200">+ Add</button>
+                </a>
+            </div>
         </div>
 
         <div class="flex justify-between items-center mx-10 my-4 text-sm">

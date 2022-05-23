@@ -31,23 +31,18 @@ class RentController extends Controller
 
         $vehicles = Vehicle::leftJoin('orders', 'vehicles.id', '=', 'orders.vehicle_id')
         ->select("vehicles.id", "vehicles.name", "vehicles.brand", "vehicles.transmission", "vehicles.cc", "vehicles.fuel", "vehicles.price", "vehicles.type", "vehicles.photo", "vehicles.year")
-        ->where("type", "=", $type)
-        ->whereNull("orders.pickup_date")
-        ->when($pickup_date && $dropoff_date, function($query) use ($pickup_date, $dropoff_date) {
-                $query->orWhere("orders.dropoff_date", "<", $pickup_date)
-                    ->orWhere("orders.pickup_date", ">", $dropoff_date);
+        ->where("vehicles.type", '=' , strtolower($type))
+        ->when($brand != 'All', function($query) use ($brand) {
+            $query->Where('vehicles.brand', '=', $brand);
+        }) 
+        ->when($transmission != 'All', function($query) use ($transmission) {
+            $query->Where('vehicles.transmission', '=', $transmission);
         })
-        ->when($brand != 'All', function($query, $brand) {
-            $query->where('vehicles.brand', $brand);
-        }) 
-        ->when($transmission != 'All', function($query, $transmission) {
-            $query->where('vehicles.transmission', $transmission);
-        }) 
         ->groupBy("vehicles.id")
-        ->having('vehicles.available_unit', '>', DB::raw('count(orders.id)'))
+        ->having('vehicles.available_unit', '>', DB::raw("count(orders.id) FILTER(WHERE ORDERS.DROPOFF_DATE >= '$dropoff_date' AND ORDERS.PICKUP_DATE >= '$pickup_date' AND ORDERS.ORDER_STATUS NOT IN ('DONE', 'CANCELLED'))"))
         ->get();
 
-        return redirect()->route('rent-'. strtolower($type). 's')->with(['vehicles' => $vehicles, 'pickup_date' => $pickup_date, 'dropoff_date' => $dropoff_date]);
+        return redirect()->route('rent-'. strtolower($type). 's')->with(['vehicles' => $vehicles, 'pickup_date' => $pickup_date, 'dropoff_date' => $dropoff_date, 'transmission' => $transmission, 'brand' => $brand]);
     }
 
     public function getFindMotor()
@@ -66,14 +61,14 @@ class RentController extends Controller
     {
         if(!session('vehicles')) return redirect()->route(('find-car'));
 
-        return view('vehicles-list', ['vehicles' => session('vehicles'), 'pickup_date' => session('pickup_date'), 'dropoff_date' => session('dropoff_date'), 'type' => 'Car']);
+        return view('vehicles-list', ['vehicles' => session('vehicles'), 'pickup_date' => session('pickup_date'), 'dropoff_date' => session('dropoff_date'), 'type' => 'Car', 'transmission' => session('transmission'), 'brand' => session('brand')]);
     }
 
     public function getRentMotors()
     {
         if(session('vehicles') == null) return redirect()->route(('find-motor'));
 
-        return view('vehicles-list', ['vehicles' => session('vehicles'), 'pickup_date' => session('pickup_date'), 'dropoff_date' => session('dropoff_date'), 'type' => 'Motor']);
+        return view('vehicles-list', ['vehicles' => session('vehicles'), 'pickup_date' => session('pickup_date'), 'dropoff_date' => session('dropoff_date'), 'type' => 'Motor', 'transmission' => session('transmission'), 'brand' => session('brand')]);
     }
 
     public function rentVehicle($type, $id)
@@ -94,7 +89,7 @@ class RentController extends Controller
         $pickup_day = new DateTime($request['dropoff_date']);
         $dropoff_day = new DateTime($request['pickup_date']);
         $rent_days = $pickup_day->diff($dropoff_day)->days;
-        $rent_price = $rent_days * $vehicle->price;
+        $rent_price = ($rent_days * $vehicle->price) + 4500;
 
         $data = [
             'vehicle_id' => $id,
@@ -126,7 +121,9 @@ class RentController extends Controller
     {
         $orders = Order::join('vehicles', 'orders.vehicle_id', '=', 'vehicles.id')
         ->select("orders.id", "orders.order_status", "orders.created_at", "vehicles.name")
-        ->where('user_id', '=', auth()->user()->id)->get();
+        ->where('user_id', '=', auth()->user()->id)
+        ->orderBy('orders.created_at', 'desc')
+        ->get();
 
         return view('order-history', ['orders' => $orders]);
     }
@@ -134,7 +131,10 @@ class RentController extends Controller
     public function getPaymentDetails($id)
     {
         $method = request()->input('method') ? request()->input('method') : 'BCA Transfer';
-        $order = Order::find($id);
+        $order = Order::join('vehicles', 'orders.vehicle_id', '=', 'vehicles.id')
+        ->select("orders.id", "orders.order_status", "orders.created_at", "vehicles.name", "orders.total_price", "orders.transaction_id")
+        ->where('orders.id', '=', $id)
+        ->first();
 
         if($order->transaction_id) {
             return redirect()->route('confirm-payment', [$order->id])->with('order', $order);

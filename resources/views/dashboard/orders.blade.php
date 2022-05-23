@@ -37,17 +37,17 @@
                 </select>
             </div>
         </div>
-        <div class="flex flex-col mx-10">
+        <div class="flex flex-col mx-4">
             <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                <div class="py-2 inline-block min-w-full sm:px-4 lg:px-6">
                 <div class="overflow-hidden">
                     <table class="min-w-full text-center">
                     <thead class="border-b bg-gray">
                         <tr>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-2">
+                            <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-2">
                                 <input type="checkbox" name="check" id="check-all" class="rounded-sm">
                             </th>
-                            <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-2">
+                            <th scope="col" class="text-sm font-bold text-gray-900 px-6 py-2">
                                 Order ID
                             </th>
                             <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-2">
@@ -108,6 +108,12 @@
                             <a href="{{ route('reject-order', [$order->id]) }}">
                             <button class="bg-red text-white text-xs rounded-full p-1.5 mx-1">REJECT</button>
                             </a>
+                            @elseif($order->order_status == 'PAYMENT_DONE')
+                            <form action="{{ route('done-vehicle') }}" method="post">
+                                @csrf
+                                <input type="hidden" name="order_id" value="{{ $order->id }}">
+                                <button class="bg-mint-100 text-white text-xs rounded-full p-1.5 mx-1">SET AS COMPLETED</button>
+                            </form>
                             @else
                             -
                             @endif

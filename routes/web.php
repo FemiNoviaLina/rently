@@ -73,6 +73,10 @@ Route::middleware(['auth', 'admin.authenticated'])-> group(function () {
     Route::get('/dashboard/orders/rejection/{id}', [AdminController::class, 'rejectOrder'])->name('reject-order');
     Route::get('/dashboard/vehicles/car', [AdminController::class, 'getVehiclesDashboardCar'])->name('vehicles-dashboard-car');
     Route::get('/dashboard/vehicles/motor', [AdminController::class, 'getVehiclesDashboardMotor'])->name('vehicles-dashboard-motor');
+    Route::post('/dashboard/vehicles/car/done', [AdminController::class, 'doneVehicle'])->name('done-vehicle');
+    Route::get('/dashboard/vehicles/car/new', [AdminController::class, 'getNewCarForm'])->name('add-car');
+    Route::get('/dashboard/vehicles/motor/new', [AdminController::class, 'getNewMotorForm'])->name('add-motor');
+    Route::post('/dashboard/vehicles/{type}/new', [AdminController::class, 'addVehicle'])->name('add-vehicle')->where('type', '\b(car|motor)\b');
 });
 
 Route::get('/test-up', function() {

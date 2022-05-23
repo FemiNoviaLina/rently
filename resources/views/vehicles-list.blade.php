@@ -24,8 +24,8 @@
                             <?php $brands = array('All', 'Honda', 'Suzuki', 'Toyota', 'Daihatsu', 'Nissan') ?>
                             @endif
                             <select name="brand" class="focus:ring focus:ring-lilac-200 focus:ring-opacity-50 block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                @foreach($brands as $brand)    
-                                <option value="{{ $brand }}" >{{ $brand }}</option>
+                                @foreach($brands as $brandItem)    
+                                <option value="{{ $brandItem }}" {{ $brand == $brandItem ? 'selected' : '' }} >{{ $brandItem }}</option>
                                 @endforeach    
                             </select>
                         </div>
@@ -37,8 +37,8 @@
                         <div class="inline-block w-32">
                             <?php $transmissions = array('All', 'Manual', 'Automatic') ?>
                             <select name="transmission" class="focus:ring focus:ring-lilac-200 focus:ring-opacity-50 block appearance-none w-full bg-white border px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                                @foreach($transmissions as $transmission)
-                                <option value="{{ $transmission }}">{{ $transmission }}</option>
+                                @foreach($transmissions as $transmissionItem)
+                                <option value="{{ $transmissionItem }}" {{ $transmission == $transmissionItem ? 'selected' : '' }}>{{ $transmissionItem }}</option>
                                 @endforeach
                             </select>
                         </div>

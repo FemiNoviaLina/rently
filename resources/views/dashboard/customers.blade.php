@@ -12,19 +12,6 @@
                 </div>
             </form>
         </div>
-        <div class="flex text-sm mx-5 my-2">
-            <?php $menus = array('All order', 'New order', 'On process', 'On rent', 'Completed', 'Canceled') ?>
-            @foreach($menus as $menu)
-            <a href="{{ route('orders-dashboard', ['selected' => $menu]) }}">
-                <div class="px-4">
-                    <p class="{{ $menu == $selected ? 'font-bold': '' }}">{{ $menu }}</p>
-                    @if($menu == $selected)
-                    <div class="h-1 bg-lilac-100"></div>
-                    @endif
-                </div>
-            </a>
-            @endforeach
-        </div>
 
         <div class="flex justify-between items-center mx-10 my-4 text-sm">
             <p>Showing result 1-10 Result</p>
@@ -74,37 +61,36 @@
                         </tr>
                     </thead class="border-b">
                     <tbody>
-                        @foreach($orders as $order)
                         <tr class="bg-white border-b">
                         <td class="text-sm text-gray-900 font-light px-6 py-2 whitespace-nowrap">
                             <input type="checkbox" name="check" class="rounded-sm">
                         </td>
                         <td class="text-sm text-gray-900 font-regular px-6 py-2 whitespace-nowrap">
-                            {{ $order->id }}
+                            
                         </td>
                         <td class="text-sm text-gray-900 font-regular px-6 py-2 whitespace-nowrap">
-                            {{ $order->vehicle_name }}
+                            
                         </td>
                         <td class="text-sm text-gray-900 font-regular px-6 py-2 whitespace-nowrap">
-                            {{ $order->pickup_date }} {{ $order->pickup_time }}
+                            
                         </td>
                         <td class="text-sm text-gray-900 font-regular px-6 py-2 whitespace-nowrap">
-                            {{ $order->dropoff_date }} {{ $order->dropoff_time }}
+                            
                         </td>
                         <td class="text-sm text-gray-900 font-regular px-6 py-2 whitespace-nowrap">
-                            {{ $order->user_name }}
+                            
                         </td>
                         <td class="text-sm text-gray-900 font-regular px-6 py-2 whitespace-nowrap">
-                            {{ $order->order_status }}
+                            
                         </td>
                         <td class="text-sm text-gray-900 font-regular px-6 py-2 whitespace-nowrap">
-                            {{ $order->total_price }}
+                            
                         </td>
                         <td class="text-sm text-gray-900 font-regular px-6 py-2 whitespace-nowrap">
                             
                         </td>
                         </tr class="bg-white border-b">
-                        @endforeach
+                        
                     </tbody>
                     </table>
                 </div>

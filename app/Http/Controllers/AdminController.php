@@ -27,7 +27,7 @@ class AdminController extends Controller
         $vehicles = Vehicle::where('type', '=', 'motor')
         ->take(10)
         ->get();
-        return view('dashboard.vehicles',  ['type' => 'Motorcycles', 'vehicles' => $vehicles]);
+        return view('dashboard.vehicles',  ['type' => 'Motor', 'vehicles' => $vehicles]);
     }
 
     public function getOrdersDashboard()
@@ -41,6 +41,7 @@ class AdminController extends Controller
         'orders.dropoff_date', 'orders.dropoff_time', 'orders.order_status', 'orders.total_price',
         'users.id as user_id', 'users.name as user_name', 'users.email', 
         'vehicles.name as vehicle_name', 'vehicles.id as vehicle_id')
+        ->orderBy('orders.id', 'desc')
         ->take($take)
         ->get();
 
@@ -61,5 +62,50 @@ class AdminController extends Controller
         $order->save();
 
         return redirect()->route('orders-dashboard');
+    }
+    
+    public function doneVehicle() {
+        $id = request()->input('order_id');
+        $order = Order::find($id);
+        $order->order_status = 'COMPLETED';
+        $order->save();
+
+        return redirect()->route('orders-dashboard');
+    }
+
+    public function getNewCarForm() {
+        $type = 'Car';
+
+        return view('dashboard.add-vehicle-form', ['type' => $type]);
+    }
+
+    public function getNewMotorForm() {
+        $type = 'Motor';
+        
+        return view('dashboard.add-vehicle-form', ['type' => $type]);
+    }
+
+    public function addVehicle($type) {
+        $request = request()->input();
+
+        $photo_filename = $request['name']. '.' . request()->file('photo')->extension();
+        $photo = request()->file('photo')->storeAs('images', $photo_filename, 'local');
+
+        $data = [
+            'name' => $request['name'],
+            'brand' => $request['brand'],
+            'type' => $type,
+            'price' => $request['price'],
+            'available_unit' => $request['available_unit'],
+            'photo' => $photo_filename,
+            'fuel' => $request['fuel'],
+            'transmission' => $request['transmission'],
+            'cc' => $request['cc'],
+            'year' => $request['year'],
+        ];
+
+        $vehicle = Vehicle::create($data);
+
+        return redirect()->route('vehicles-dashboard-'.$type);
     }
 }

@@ -14,19 +14,19 @@
                 </div>
                 <div>
                     <x-label for="phone_1" value="Phone Number 1" class="block font-bold text-base"/>
-                    <x-input id="phone-1" class="block" type="text" name="phone_1" value="" required autofocus />
+                    <x-input id="phone-1" class="block" type="text" name="phone_1" value="{{ Auth::user()->phone_1 }}" required autofocus />
                 </div>
                 <div>
                     <x-label for="phone_2" value="Phone Number 2" class="block font-bold text-base"/>
-                    <x-input id="phone-2" class="block" type="text" name="phone_2" value="" required />
+                    <x-input id="phone-2" class="block" type="text" name="phone_2" value="{{ Auth::user()->phone_2 }}" required />
                 </div>
                 <div>
                     <x-label for="address_id" value="Address (According to your ID card)" class="inline-block font-bold text-base"/>
-                    <x-text-area id="address-id" class="block" name="address_id" required/>
+                    <x-text-area id="address-id" class="block" name="address_id" value="{{ Auth::user()->address_id }}" required/>
                 </div>
                 <div>
                     <x-label for="address_mlg" value="Address (Malang)" class="inline-block font-bold text-base"/>
-                    <x-text-area id="address-mlg" class="block" name="address_mlg" required/>
+                    <x-text-area id="address-mlg" class="block" name="address_mlg" value="{{ Auth::user()->address_mlg }}" required/>
                 </div>
                 <div class="flex items-center">
                     <x-button filled="true" class="px-0">Save</x-button>
