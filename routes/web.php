@@ -69,8 +69,9 @@ Route::middleware(['auth', 'verified'])-> group(function () {
 Route::middleware(['auth', 'admin.authenticated'])-> group(function () {
     Route::get('/dashboard/customers', [AdminController::class, 'getCustomersDashboard'])->name('customers-dahboard');
     Route::get('/dashboard/orders', [AdminController::class, 'getOrdersDashboard'])->name('orders-dashboard');
-    Route::get('/dashboard/orders/acceptance/{id}', [AdminController::class, 'acceptOrder'])->name('accept-order');
-    Route::get('/dashboard/orders/rejection/{id}', [AdminController::class, 'rejectOrder'])->name('reject-order');
+    Route::get('/order-details/{id}', [AdminController::class, 'getOrderDetails'])->name('order-details');
+    Route::post('/dashboard/orders/acceptance/{id}', [AdminController::class, 'acceptOrder'])->name('accept-order');
+    Route::post('/dashboard/orders/rejection/{id}', [AdminController::class, 'rejectOrder'])->name('reject-order');
     Route::get('/dashboard/vehicles/car', [AdminController::class, 'getVehiclesDashboardCar'])->name('vehicles-dashboard-car');
     Route::get('/dashboard/vehicles/motor', [AdminController::class, 'getVehiclesDashboardMotor'])->name('vehicles-dashboard-motor');
     Route::post('/dashboard/vehicles/car/done', [AdminController::class, 'doneVehicle'])->name('done-vehicle');

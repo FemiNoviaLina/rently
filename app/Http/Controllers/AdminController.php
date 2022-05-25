@@ -108,4 +108,22 @@ class AdminController extends Controller
 
         return redirect()->route('vehicles-dashboard-'.$type);
     }
+
+    public function getOrderDetails($id) {
+        $orders = Order::join('users', 'orders.user_id', '=', 'users.id')
+        ->join('vehicles', 'orders.vehicle_id', '=', 'vehicles.id')
+        ->select('orders.id', 'orders.pickup_date', 'orders.pickup_time', 'orders.pickup_address', 
+        'orders.dropoff_date', 'orders.dropoff_time', 'orders.dropoff_address', 'orders.phone_1',
+        'orders.phone_2', 'orders.address_id', 'orders.address_mlg', 'orders.note', 'orders.order_status', 
+        'orders.total_price', 'orders.id_card', 'orders.id_card_2', 'orders.driver_license',
+        'orders.payment_method', 'orders.created_at', 'orders.transaction_id', 'orders.payment_expiry_time',
+        'users.id as user_id', 'users.name as user_name', 'users.email', 
+        'vehicles.id as vehicles_id', 'vehicles.name as vehicle_name', 'vehicles.type',
+        'vehicles.price', 'vehicles.available_unit', 'vehicles.photo', 'vehicles.fuel', 'vehicles.transmission',
+        'vehicles.cc', 'vehicles.year')
+        ->where('orders.id', '=', $id)
+        ->get();
+
+        return response()->json($orders);
+    }
 }

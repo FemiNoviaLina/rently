@@ -71,9 +71,27 @@ class RentController extends Controller
         return view('vehicles-list', ['vehicles' => session('vehicles'), 'pickup_date' => session('pickup_date'), 'dropoff_date' => session('dropoff_date'), 'type' => 'Motor', 'transmission' => session('transmission'), 'brand' => session('brand')]);
     }
 
-    public function rentVehicle($type, $id)
+    public function rentVehicle($type, $id, Request $request)
     {
-        $request = request()->input();
+
+        // $request = $request->validate([
+        //     'pickup_date' => 'required|before_or_equal:dropoff_date|after_or_equal:today',
+        //     'pickup_time' => 'required',
+        //     'dropoff_date' => 'required|after_or_equal:pickup_date',
+        //     'dropoff_time' => 'required',
+        //     'vehicle_id' => 'required',
+        //     'user_id' => 'required',
+        //     'pickup_address' => 'required',
+        //     'dropoff_address' => 'required',
+        //     'phone_1' => 'required',
+        //     'phone_2' => 'required',
+        //     'address_id' => 'required',
+        //     'address_mlg' => 'required',
+        //     'id_card' => 'required|image|mimes:jpeg,png,jpg,pdf|max:2048',
+        //     'id_card_2' => 'required|image|mimes:jpeg,png,jpg,pdf|max:2048',
+        //     'driver_license' => 'required|image|mimes:jpeg,png,jpg,pdf|max:2048',
+        //     'note' => 'nullable',
+        // ]);
 
         $vehicle = Vehicle::find($id);
 
@@ -119,6 +137,16 @@ class RentController extends Controller
 
     public function getUserOrders()
     {
+        // $orders = Order::join('vehicles', 'orders.vehicle_id', '=', 'vehicles.id')
+        // ->where('user_id', '=', auth()->user()->id)
+        // ->where('order_status', 'IN', ['PENDING', 'WAITING_FOR_PAYMENT'])
+        // ->where('pickup_date', '<', date('Y-m-d'))
+        // ->orWhere(function($query) {
+        //     $query->where('pickup_date', '=', date('Y-m-d'))
+        //     ->where('pickup_time', '<', date('H:i:s'));
+        // })
+        // ->update(['order_status' => 'CANCELED']);
+
         $orders = Order::join('vehicles', 'orders.vehicle_id', '=', 'vehicles.id')
         ->select("orders.id", "orders.order_status", "orders.created_at", "vehicles.name")
         ->where('user_id', '=', auth()->user()->id)

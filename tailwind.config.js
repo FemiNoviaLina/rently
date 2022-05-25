@@ -18,6 +18,7 @@ module.exports = {
             current: 'currentColor',
             'black': '#000000',
             'white': '#FFFFFF',
+            'light-red': '#FDD4D4',
             'red': '#FF5050',
             'gray': {
                 50:'#5D5D94',
@@ -31,9 +32,14 @@ module.exports = {
                 400: '#DDDEF5'
             },
             'mint': {
+                50: '#1BCE7F',
                 100: '#25DE8D',
                 200: '#83EEBF',
                 300: '#A6F1D0'
+            }, 
+            'yellow': {
+                100: '#AC9D16',
+                200: '#FAFDD4'
             }
         },
         extend: {

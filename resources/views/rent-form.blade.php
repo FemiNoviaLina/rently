@@ -29,6 +29,11 @@
         </div>
         <div class="w-full max-w-7xl mx-auto rent-form my-4 px-20 py-10 bg-white shadow-md rounded-lg ">
             <h1 class="font-extrabold text-4xl text-lilac-100">Customer Rent Form</h1>
+            @if($errors->any())
+            <div class="bg-red bg-opacity-75 text-white p-2 rounded-md border border-red">
+                <p>Data tidak sesuai</p>
+            </div>
+            @endif
             <form action="{{ url('rent/'.$vehicle->type.'/'.$vehicle->id) }}" method="post" enctype="multipart/form-data" class="flex flex-wrap">
                 @csrf
                 <div class="left-col basis-1/2">
@@ -72,11 +77,11 @@
                     <x-text-area id="address-mlg" class="block w-4/5" name="address_mlg" required />
                     <div class="date-time flex">    
                         <div class="date basis-6/12">
-                            <x-label for="dropoff_date" value="Pick Up Date" class="block font-bold text-base pt-4"/>
+                            <x-label for="dropoff_date" value="Drop Off Date" class="block font-bold text-base pt-4"/>
                             <x-input id="dropoff-date" class="block" type="date" name="dropoff_date" value="{{ date('Y-m-d', strtotime('tomorrow')) }}" required />
                         </div>
                         <div class="time basis-3/12 ml-8">
-                            <x-label for="dropoff_time" value="Pick Up Time" class="block font-bold text-base pt-4"/>
+                            <x-label for="dropoff_time" value="Drop Off Time" class="block font-bold text-base pt-4"/>
                             <x-input id="dropoff-time" class="block" type="time" name="dropoff_time" value="{{ explode(' ', gmdate('Y-m-d h:i \G\M\T'))[1] }}" required />
                         </div>
                     </div>
