@@ -11,7 +11,7 @@
                     @if(auth()->user()->hasRole('user'))
                     <?php $values = array('Rent' => 'rent', 'My order' => 'me/orders', 'Guide' => 'guide', 'Help' => 'help', 'About' => 'about'); ?>
                     @else
-                    <?php $values = array('Order' => 'dashboard/orders', 'Product' => 'dashboard/vehicles', 'Customer' => 'dashboard/customers') ?>
+                    <?php $values = array('Order' => 'dashboard/orders', 'Product' => 'dashboard/vehicles', 'Customer' => 'dashboard/customers', 'Chat' => 'dashboard/chats') ?>
                     @endif 
                 @endauth
                 @foreach($values as $key => $value)

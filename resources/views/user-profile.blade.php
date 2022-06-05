@@ -22,7 +22,7 @@
                 </div>
                 <div>
                     <x-label for="address_id" value="Address (According to your ID card)" class="inline-block font-bold text-base"/>
-                    <x-text-area id="address-id" class="block" name="address_id" value="{{ Auth::user()->address_id }}" required/>
+                    <x-text-area id="address-id" class="block" name="address_id" required/>
                 </div>
                 <div>
                     <x-label for="address_mlg" value="Address (Malang)" class="inline-block font-bold text-base"/>
@@ -34,5 +34,10 @@
                 @csrf
             </form>
         </div>
+
+        <script>
+            document.getElementById('address-id').textContent = '{{ Auth::user()->address_id }}';
+            document.getElementById('address-mlg').textContent = '{{ Auth::user()->address_mlg }}';
+        </script>
     </x-base-body>
 </x-base-layout>

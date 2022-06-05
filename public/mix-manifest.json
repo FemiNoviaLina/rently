@@ -1,6 +1,11 @@
 {
     "/js/app.js": "/js/app.js",
     "/js/navbar_script.js": "/js/navbar_script.js",
-    "/js/dashboard_modal_script.js": "/js/dashboard_modal_script.js",
+    "/js/orders_dashboard_script.js": "/js/orders_dashboard_script.js",
+    "/js/customers_dashboard_script.js": "/js/customers_dashboard_script.js",
+    "/js/vehicles_dashboard_script.js": "/js/vehicles_dashboard_script.js",
+    "/js/chat_script.js": "/js/chat_script.js",
+    "/js/chats_dashboard_script.js": "/js/chats_dashboard_script.js",
+    "/js/update_vehicle_script.js": "/js/update_vehicle_script.js",
     "/css/app.css": "/css/app.css"
 }

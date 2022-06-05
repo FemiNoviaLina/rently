@@ -1,5 +1,5 @@
-$("#table-body").on("click", "tr:not(:first-child)", () => {
-    let row = $(event.target).closest("tr");;
+$("#table-body").on("click", "tr", () => {
+    let row = $(event.target).closest("tr");
     $.get(row.children()[0].value,
     (data) => {
         console.log(data)
@@ -40,7 +40,7 @@ $("#table-body").on("click", "tr:not(:first-child)", () => {
 
 $("#close").on("click", () => {
     $("#modal").css('display','none');
-})
+});
 
 $("#customer-tab").on("click", () => {
     $("#customer-tab").css("border-bottom", "4px solid #7C7DDC");
@@ -49,7 +49,7 @@ $("#customer-tab").on("click", () => {
     $("#customer").css("display", "block");
     $("#order").css("display", "none");
     $("#vehicle").css("display", "none");
-})
+});
 
 $("#order-tab").on("click", () => {
     $("#order-tab").css("border-bottom", "4px solid #7C7DDC");
@@ -58,7 +58,7 @@ $("#order-tab").on("click", () => {
     $("#order").css("display", "block");
     $("#customer").css("display", "none");
     $("#vehicle").css("display", "none");
-})
+});
 
 $("#vehicle-tab").on("click", () => {
     $("#vehicle-tab").css("border-bottom", "4px solid #7C7DDC");
@@ -67,4 +67,4 @@ $("#vehicle-tab").on("click", () => {
     $("#vehicle").css("display", "block");
     $("#order").css("display", "none");
     $("#customer").css("display", "none");
-})
+});

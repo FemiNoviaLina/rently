@@ -11,7 +11,15 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js').js('resources/js/navbar_script.js', 'public/js').js('resources/js/dashboard_modal_script.js', 'public/js').postCss('resources/css/app.css', 'public/css', [
+mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/navbar_script.js', 'public/js')
+    .js('resources/js/orders_dashboard_script.js', 'public/js')
+    .js('resources/js/customers_dashboard_script.js', 'public/js')
+    .js('resources/js/vehicles_dashboard_script.js', 'public/js')
+    .js('resources/js/chat_script.js', 'public/js')
+    .js('resources/js/chats_dashboard_script.js', 'public/js')
+    .js('resources/js/update_vehicle_script.js', 'public/js')
+    .postCss('resources/css/app.css', 'public/css', [
     require('postcss-import'),
     require('tailwindcss'),
     require('autoprefixer'),
