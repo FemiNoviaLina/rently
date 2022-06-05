@@ -1,4 +1,4 @@
-$("#table-body").on("click", "tr", () => {
+$("#table-body").on("click", "tr td:not[class='action']", () => {
     let row = $(event.target).closest("tr");
     $.get(row.children()[0].value,
     (data) => {

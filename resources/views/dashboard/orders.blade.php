@@ -91,7 +91,7 @@
                     <td class="px-2 py-4">
                         IDR {{ $order->total_price }}
                     </td>
-                    <td class="px-2 py-4 flex gap-2">
+                    <td class="action px-2 py-4 flex gap-2">
                         @if($order->order_status == 'PENDING')
                         <form action="{{ route('accept-order', [$order->id]) }}" method="post">
                             @csrf

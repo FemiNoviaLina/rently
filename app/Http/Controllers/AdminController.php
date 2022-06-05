@@ -137,6 +137,9 @@ class AdminController extends Controller
     }
     
     public function doneVehicle() {
+        $id = request()->order_id;
+        $order = Order::find($id);
+
         $order->order_status = 'COMPLETED';
         $order->save();
 

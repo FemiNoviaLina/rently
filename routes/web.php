@@ -57,6 +57,8 @@ Route::get('/rent/cars', [RentController::class, 'getRentCars'])->name('rent-car
 
 Route::get('/list/cars', [BasicViewController::class, 'getList']);
 
+Route::post('payment/notification', [RentController::class, 'paymentNotification'])->name('payment-notification');
+
 Route::middleware(['auth', 'verified'])-> group(function () {
     Route::get('/rent/car/{id}', [RentController::class, 'getRentForm']);
     Route::get('/rent/motor/{id}', [RentController::class, 'getRentForm']);
@@ -89,20 +91,6 @@ Route::middleware(['auth', 'admin.authenticated'])-> group(function () {
     Route::get('/dashboard/chats/get/{id}', [ChatsController::class, 'fetchAdminMessage'])->name('fetch-admin-message');
     Route::post('/dashboard/vehicles/{id}/update', [AdminController::class, 'updateVehicle'])->name('update-vehicle');
     Route::post('/dashboard/vehicles/{id}/update/image', [AdminController::class, 'updateVehicleImage'])->name('update-vehicle-image');
-});
-
-Route::get('/test-up', function() {
-    return view('test-up');
-});
-
-Route::post('/test-up', function(Request $request) {
-    $path = $request->file('image')->storeAs(
-        'images', 'example.png'
-    );
-});
-
-Route::get('/uploaded', function() {
-    return view('test-view');
 });
 
 Route::fallback([BasicViewController::class, 'fallback']);
