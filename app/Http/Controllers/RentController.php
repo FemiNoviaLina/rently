@@ -298,6 +298,6 @@ class RentController extends Controller
         }
 
         $order->save();
-        return response()->noContent();
+        return response('ok', 200);
     }
 }
