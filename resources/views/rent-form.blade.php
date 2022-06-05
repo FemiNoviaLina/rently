@@ -62,11 +62,11 @@
                     <x-text-area id="my-pickup-location" class="block w-4/5" name="pickup_location" required disabled/>
                     <x-label for="upload" value="Upload Documents" class="block font-bold text-base pt-4"/>
                     <x-label for="id_card" value="1. Upload Your Citizen Identity Card" class="text-base pt-2"/>
-                    <input type="file" name="id_card" id="id-card" accept=".png, .jpg, .pdf" required>
+                    <input type="file" name="id_card" id="id-card" accept=".png, .jpg, .jpeg, .pdf" required>
                     <x-label for="driver_licence" value="2. Upload Your Driver License (SIM C)" class="text-base pt-2"/>
-                    <input type="file" name="driver_license" id="driver-license" accept=".png, .jpg, .pdf" required>
+                    <input type="file" name="driver_license" id="driver-license" accept=".png, .jpeg, .jpg, .pdf" required>
                     <x-label for="id_card_2" value="3. Upload Other ID Card" class="text-base pt-2"/>
-                    <input type="file" name="id_card_2" id="id-card-2" accept=".png, .jpg, .pdf" required>
+                    <input type="file" name="id_card_2" id="id-card-2" accept=".png, .jpg, .jpeg, .pdf" required>
                 </div>
                 <div class="right-col basis-1/2">
                     <x-label for="email" :value="__('Email')" class="block font-bold text-base pt-4" />

@@ -20,12 +20,34 @@
                             <img src="{{ asset('images/logo-'.strtolower(explode(' ', $order->payment_method)[0]).'.png') }}" class="h-3/6">
                             <h2 class="font-bold">{{ $order->payment_method }}</h2>
                         </div>
+                        @if($order->payment_method == 'BCA Transfer' || $order->payment_method == 'BNI Transfer' || $order->payment_method == 'BRI Transfer' || $order->payment_method == 'Permata Transfer')
                         <div class="px-2 grid lg:grid-rows-2 lg:grid-cols-2 my-2 gap-y-2">
                             <p>Virtual Account Number</p>
                             <p>{{ $order->virtual_account }}</p>
                             <p>Recipient Name</p>
                             <p>business.ly</p>
                         </div>
+                        @elseif ($order->payment_method == 'Mandiri Transfer')
+                        <div class="px-2 grid lg:grid-rows-3 lg:grid-cols-2 my-2 gap-y-2">
+                            <p>Bill Key</p>
+                            <p>{{ explode(' ', $order->virtual_account)[0] }}</p>
+                            <p>Biller code</p>
+                            <p>{{ explode(' ', $order->virtual_account)[1] }}</p>
+                            <p>Recipient Name</p>
+                            <p>business.ly</p>
+                        </div>
+                        @elseif ($order->payment_method == 'Shopee Pay' ||  $order->payment_method == 'Gopay' || $order->payment_method == 'OVO' || $order->payment_method == 'Dana')
+                        <div class="px-2 grid lg:grid-rows-3 lg:grid-cols-2 my-2 gap-y-2">
+                            <p>QR</p>
+                            <div>
+                                <img src="{{ $order->qr_link }}" alt="{{ $order->qr_link }}" class="w-32">
+                            </div>
+                            <p>Link</p>
+                            <p>{{ $order->deep_link }}</p>
+                            <p>Recipient Name</p>
+                            <p>business.ly</p>
+                        </div>
+                        @endif
                         <hr class="w-8/12">
                             <div class="px-2 grid lg:grid-rows-1 lg:grid-cols-2 my-2">
                                 <p class="font-bold">Total Price</p>

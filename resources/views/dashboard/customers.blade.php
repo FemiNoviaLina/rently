@@ -108,7 +108,7 @@
         </div>
         <div id="modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 bg-gray-300 bg-opacity-75 z-50 w-full md:inset-0 h-full flex items-center justify-center">
             <div class="p-4 w-full max-w-3xl h-full md:h-auto">
-                <div class="relative bg-white rounded-lg shadow">
+                <div class="relative bg-white rounded-lg shadow max-h-screen overflow-y-scroll">
                     <div class="flex justify-between items-start p-4 rounded-t border-b">
                         <h3 class="text-3xl font-semibold text-lilac-100">
                             Customer Details

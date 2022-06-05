@@ -3,7 +3,7 @@ var __webpack_exports__ = {};
 /*!*************************************************!*\
   !*** ./resources/js/orders_dashboard_script.js ***!
   \*************************************************/
-$("#table-body").on("click", "tr td:not[class='action']", function () {
+$("#table-body").on("click", "tr td:not(.action)", function () {
   var row = $(event.target).closest("tr");
   $.get(row.children()[0].value, function (data) {
     console.log(data);

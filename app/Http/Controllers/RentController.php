@@ -177,7 +177,7 @@ class RentController extends Controller
             "Shopee Pay" => "gopay",
             "Dana" => "gopay",
             "OVO" => "gopay",
-            "GoPay" => "gopay"
+            "Gopay" => "gopay"
         );
 
         $req_body = [
@@ -211,7 +211,7 @@ class RentController extends Controller
             if($payment_type[$method] == 'bank_transfer') {
                 $order->virtual_account = $response['va_numbers'][0]['va_number'];
             } else if ($payment_type[$method] == 'echannel') {
-                $order->virtual_account = $response['bill_key'] . ' ' . $response['bill_code'];
+                $order->virtual_account = $response['bill_key'] . ' ' . $response['biller_code'];
             } else if ($payment_type[$method] == 'gopay') {
                 $order->qr_link = $response['actions'][0]['url'];
                 $order->deep_link = $response['actions'][1]['url'];

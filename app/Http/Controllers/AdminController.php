@@ -85,7 +85,8 @@ class AdminController extends Controller
             $query->Where('orders.order_status', 'COMPLETED');
         })
         ->when($selected == 'Canceled', function($query) {
-            $query->Where('orders.order_status', 'CANCELED');
+            $query->Where('orders.order_status', 'CANCELED')
+            ->orWhere('orders.order_status', 'REJECTED');
         })
         ->take($take)
         ->skip(($page - 1) * $take)
